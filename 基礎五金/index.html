@@ -1333,6 +1333,9 @@
             } else if (filter === '門用配件') {
                 // 顯示所有門用配件產品
                 filtered = products.filter(p => p.category === '門下靜音條' || p.category === '拍拍手' || p.category === '甲蟲' || p.category === '油壓支撐桿');
+            } else if (filter === '旋轉門五金') {
+                // 顯示所有旋轉門五金產品（中軸門、偏軸門、中偏軸門）
+                filtered = products.filter(p => p.category === '中軸門' || p.category === '偏軸門' || p.category === '中偏軸門');
             } else {
                 filtered = products.filter(p => p.category === filter);
             }
