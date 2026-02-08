@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s /b)",
+      "Bash(tree /F /L 3)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm install:*)",
+      "Bash(uipro init:*)",
+      "Bash(dir /s /b \"C:\\\\Users\\\\詹家騏\\\\Desktop\\\\website\\\\型錄網站\\\\.claude\")",
+      "Bash(python:*)"
+    ]
+  }
+}

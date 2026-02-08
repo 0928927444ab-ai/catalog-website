@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摩瑪建材產品資訊網站</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --gold: #c9a962;
+            --gold-light: #e8d5a3;
+            --gold-dark: #8b7355;
+            --brand-red: #7B2D26;
+            --brand-brown: #6B4423;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666;
+            --border: rgba(201, 169, 98, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(201, 169, 98, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(201, 169, 98, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.9) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 桌面版 nav 定位 */
+        @media (min-width: 769px) {
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .header-content {
+                flex: 1;
+                max-width: none;
+            }
+
+            header nav {
+                position: absolute;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .logo-cn {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .logo-en {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-label {
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            padding-right: 1rem;
+            border-right: 1px solid var(--border);
+            margin-right: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 2rem 50px;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, rgba(201, 169, 98, 0.05) 0%, transparent 50%),
+                linear-gradient(225deg, rgba(201, 169, 98, 0.03) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Brand Showcase - Professional UI */
+        .brand-showcase {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 0;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .brand-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 40px;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .brand-card.parent {
+            background: var(--brand-red);
+            border-radius: 12px 0 0 12px;
+            min-width: 280px;
+        }
+
+        .brand-card.parent img {
+            height: 80px;
+            width: auto;
+        }
+
+        .brand-card.child {
+            background: rgba(255,255,255,0.98);
+            border-radius: 0 12px 12px 0;
+            min-width: 240px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+        }
+
+        .brand-card.child img {
+            height: 90px;
+            width: auto;
+        }
+
+        .brand-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, var(--brand-red), var(--gold-dark));
+            padding: 15px 20px;
+            gap: 6px;
+        }
+
+        .brand-connector-line {
+            width: 2px;
+            height: 20px;
+            background: var(--gold-light);
+        }
+
+        .brand-connector-icon {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            font-size: 0.8rem;
+        }
+
+        .brand-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.65rem;
+            color: var(--gold);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-top: 12px;
+            opacity: 0.8;
+        }
+
+        .brand-card.child .brand-label {
+            color: var(--brand-brown);
+        }
+
+        .hero-badge {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', 'Noto Serif TC', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.4em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 2;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+        }
+
+        .hero-group {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .hero-group span {
+            color: var(--gold);
+        }
+
+        .hero-services {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.7s forwards;
+        }
+
+        .hero-services span {
+            font-size: 1.1rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            position: relative;
+        }
+
+        .hero-services span:not(:last-child)::after {
+            content: '·';
+            position: absolute;
+            right: -24px;
+            color: var(--gold-dark);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.9s forwards;
+        }
+
+        .scroll-hint span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .scroll-hint::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollPulse 2s ease infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Section Common */
+        .section {
+            position: relative;
+            z-index: 1;
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            letter-spacing: 3px;
+        }
+
+        /* Companies Section - Brand Family */
+        .companies-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .companies-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .companies-intro p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .brand-family {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .brand-family-row {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 20px;
+        }
+
+        .subsidiary-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-width: 160px;
+            position: relative;
+        }
+
+        .subsidiary-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .subsidiary-card.highlight {
+            background: var(--brand-brown);
+            box-shadow: 0 8px 30px rgba(107, 68, 35, 0.4);
+        }
+
+        .subsidiary-card.red {
+            background: var(--brand-red);
+            box-shadow: 0 8px 30px rgba(123, 45, 38, 0.4);
+        }
+
+        .subsidiary-card.gold {
+            background: var(--gold-dark);
+            box-shadow: 0 8px 30px rgba(139, 115, 85, 0.4);
+        }
+
+        .subsidiary-card.outline {
+            background: transparent;
+            border: 1px solid var(--border);
+        }
+
+        .subsidiary-card.outline:hover {
+            border-color: var(--gold);
+        }
+
+        .subsidiary-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .subsidiary-card.outline .subsidiary-icon {
+            color: var(--brand-red);
+        }
+
+        .subsidiary-name {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .subsidiary-card.outline .subsidiary-name {
+            color: var(--text-primary);
+        }
+
+        .subsidiary-eng {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subsidiary-card.outline .subsidiary-eng {
+            color: var(--text-muted);
+        }
+
+        .subsidiary-type {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--bg-primary);
+            font-size: 0.6rem;
+            padding: 3px 12px;
+            border-radius: 10px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--bg-primary);
+        }
+
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 40px;
+        }
+
+        .contact-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-brand h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: 3px;
+        }
+
+        .contact-brand span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: lowercase;
+        }
+
+        .contact-main {
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+        }
+
+        .contact-qr {
+            text-align: center;
+        }
+
+        .contact-qr img {
+            width: 140px;
+            height: 140px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            background: white;
+            margin-bottom: 12px;
+        }
+
+        .contact-qr p {
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .contact-address {
+            text-align: left;
+        }
+
+        .contact-address h4 {
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .contact-address p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .map-link:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        .map-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 1;
+            padding: 40px 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .brand-family-row {
+                flex-wrap: wrap;
+            }
+
+            .subsidiary-card {
+                min-width: 140px;
+            }
+
+            .contact-main {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+
+            .contact-address {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0.8rem 1.2rem;
+            }
+
+            .logo-img {
+                height: 35px;
+            }
+
+            .logo-cn {
+                font-size: 0.9rem;
+            }
+
+            .logo-en {
+                font-size: 0.65rem;
+            }
+
+            header {
+                overflow: visible;
+            }
+
+            .menu-toggle {
+                display: flex;
+                position: relative;
+                flex-shrink: 0;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                z-index: 200;
+                padding: 0 1rem;
+                border-bottom: 1px solid transparent;
+            }
+
+            nav.active {
+                max-height: 400px;
+                padding: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            nav a {
+                font-size: 1rem;
+                letter-spacing: 0.1em;
+                padding: 1rem 0.5rem;
+                display: block;
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+            }
+
+            nav a:last-child {
+                border-bottom: none;
+            }
+
+            .nav-label {
+                display: none;
+            }
+
+            .hero {
+                padding: 100px 1.5rem 60px;
+            }
+
+            .brand-showcase {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .brand-card.parent {
+                border-radius: 12px 12px 0 0;
+                min-width: auto;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .brand-card.child {
+                border-radius: 0 0 12px 12px;
+                min-width: auto;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .brand-connector {
+                flex-direction: row;
+                padding: 10px 20px;
+                background: linear-gradient(180deg, var(--brand-red), var(--gold-dark));
+            }
+
+            .brand-connector-line {
+                width: 20px;
+                height: 2px;
+            }
+
+            .brand-connector-icon {
+                transform: rotate(90deg);
+            }
+
+            .hero-services {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero-services span:not(:last-child)::after {
+                display: none;
+            }
+
+            .section {
+                padding: 60px 1.5rem;
+            }
+
+            .brand-family-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .subsidiary-card {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                letter-spacing: 4px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 4px;
+            }
+
+            .subsidiary-card {
+                max-width: 100%;
+            }
+
+            .subsidiary-icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="themore-logo.jpg" alt="樂莫集團" class="logo-img">
+                <div class="logo-text">
+                    <span class="logo-cn">樂莫集團</span>
+                    <span class="logo-en">The More</span>
+                </div>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <nav id="nav">
+            <span class="nav-label">產品照片及定價連結</span>
+            <a href="門用五金/index.html" onclick="closeMenu()">門用五金</a>
+            <a href="電子鎖/index.html" onclick="closeMenu()">電子鎖</a>
+            <a href="基礎五金/index.html" onclick="closeMenu()">基礎五金</a>
+            <a href="輕奢石/index.html" onclick="closeMenu()">輕奢石</a>
+            <a href="#contact" onclick="closeMenu()">聯絡我們</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Brand Showcase -->
+        <div class="brand-showcase">
+            <div class="brand-card parent">
+                <img src="themore-logo.jpg" alt="樂莫集團 THE MORE">
+                <span class="brand-label">The More</span>
+            </div>
+            <div class="brand-connector">
+                <div class="brand-connector-line"></div>
+                <div class="brand-connector-icon">→</div>
+                <div class="brand-connector-line"></div>
+            </div>
+            <div class="brand-card child">
+                <img src="moma-logo.jpg" alt="摩瑪建材 MORE MATERIALS+">
+                <span class="brand-label">more materials+</span>
+            </div>
+        </div>
+
+        <p class="hero-tagline">
+            義大利設計美學，德國工藝品質<br>
+            用新式建材改變台灣裝修生態
+        </p>
+        <div class="hero-services">
+            <span>設計</span>
+            <span>建材</span>
+            <span>工程</span>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="section companies-section">
+        <div class="section-header">
+            <p class="section-label">Group Companies</p>
+            <h2 class="section-title">樂莫集團 專業團隊</h2>
+        </div>
+        <div class="companies-intro">
+            <p>樂莫集團以摩瑪建材為核心，串聯旗下五間專業公司<br>提供從設計、建材到施工的一站式服務</p>
+        </div>
+
+        <div class="brand-family">
+            <div class="brand-family-row">
+                <div class="subsidiary-card red">
+                    <span class="subsidiary-type">室內設計</span>
+                    <h3 class="subsidiary-name">澄墨設計</h3>
+                    <p class="subsidiary-eng">Cheng Mo Design</p>
+                </div>
+                <div class="subsidiary-card red">
+                    <span class="subsidiary-type">智能整合</span>
+                    <h3 class="subsidiary-name">莫爾睿空間</h3>
+                    <p class="subsidiary-eng">Moreray Space</p>
+                </div>
+                <div class="subsidiary-card red">
+                    <span class="subsidiary-type">裝修工程</span>
+                    <h3 class="subsidiary-name">摩研裝修</h3>
+                    <p class="subsidiary-eng">More Yan</p>
+                </div>
+                <div class="subsidiary-card red">
+                    <span class="subsidiary-type">裝修工程</span>
+                    <h3 class="subsidiary-name">摩築裝修</h3>
+                    <p class="subsidiary-eng">More Zhu</p>
+                </div>
+                <div class="subsidiary-card red">
+                    <span class="subsidiary-type">淋浴門工程</span>
+                    <h3 class="subsidiary-name">巧恩工程</h3>
+                    <p class="subsidiary-eng">Cho Wen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="contact-content">
+            <div class="contact-main">
+                <div class="contact-qr">
+                    <img src="LINE_QR.jpg" alt="LINE QR Code">
+                    <p>加入官方 LINE</p>
+                </div>
+                <div class="contact-address">
+                    <h4>台中南興店</h4>
+                    <p>
+                        台中市北屯區軍福19路476號<br>
+                        （南興公園停車場正對面）
+                    </p>
+                    <a href="https://maps.app.goo.gl/8nXUZuLBw7VQcPqq9" target="_blank" class="map-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        開啟 Google 地圖
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 摩瑪建材產品資訊網站 | 樂莫集團 The More Group. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu
+        function toggleMenu() {
+            document.querySelector('.menu-toggle').classList.toggle('active');
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.querySelector('.menu-toggle').classList.remove('active');
+            document.getElementById('nav').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

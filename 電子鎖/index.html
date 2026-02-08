@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摩瑪建材產品資訊網站 | 電子鎖</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --gold: #c9a962;
+            --gold-light: #e8d5a3;
+            --gold-dark: #8b7355;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666;
+            --border: rgba(201, 169, 98, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Noto Serif TC', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.9) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 桌面版 nav 定位 */
+        @media (min-width: 769px) {
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .header-content {
+                flex: 1;
+                max-width: none;
+            }
+
+            header nav {
+                position: absolute;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo:visited .logo-group {
+            color: var(--gold);
+        }
+
+        .logo:visited .logo-brand {
+            color: var(--text-primary);
+        }
+
+        .logo:visited .logo-brand span {
+            color: var(--gold);
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .logo-group {
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        .logo-brand {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .logo-brand span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .nav-label {
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            padding-right: 1rem;
+            border-right: 1px solid var(--border);
+            margin-right: 0.5rem;
+        }
+
+        /* Hamburger Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
+                linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 169, 98, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', 'Noto Serif TC', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: var(--gold);
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            background: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scrollbar-width: none;
+        }
+
+        .filter-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-family: 'Noto Serif TC', serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            letter-spacing: 0.1em;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        /* Products Grid */
+        .products-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.8rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            border-color: var(--gold);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 40px rgba(201, 169, 98, 0.15);
+            z-index: 10;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-image {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #1f1f1f 0%, #0f0f0f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 1.5rem;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        .product-image .placeholder {
+            font-size: 2rem;
+            color: var(--gold-dark);
+            opacity: 0.3;
+        }
+
+        .zoom-icon {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 169, 98, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s;
+        }
+
+        .zoom-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--bg-primary);
+        }
+
+        .product-card:hover .zoom-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .product-info {
+            padding: 0.6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-name {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .product-feature {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+
+        .product-price::before {
+            content: 'NT$ ';
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) transparent;
+        }
+
+        .lightbox-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .lightbox-content::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 50vh;
+            object-fit: contain;
+            border: 1px solid var(--border);
+        }
+
+        .lightbox-info {
+            text-align: center;
+            padding: 1.5rem 1.5rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-top: none;
+        }
+
+        .lightbox-fixed-info {
+            display: none;
+            margin-bottom: 0.8rem;
+        }
+
+        .lightbox-fixed-info.show {
+            display: block;
+        }
+
+        .lightbox-fixed-tag {
+            display: inline-block;
+            background: rgba(120, 120, 120, 0.9);
+            color: #fff;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+        }
+
+        .lightbox-fixed-note {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 0.4rem;
+        }
+
+        .lightbox-name {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .lightbox-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .lightbox-feature {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0.8rem 0 1.2rem;
+        }
+
+        .lightbox-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .method-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.6rem 0.8rem;
+            background: rgba(201, 169, 98, 0.08);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            border-radius: 6px;
+            min-width: 70px;
+            transition: all 0.3s;
+        }
+
+        .method-item:hover {
+            background: rgba(201, 169, 98, 0.15);
+            border-color: var(--gold);
+        }
+
+        .method-icon {
+            font-size: 1.5rem;
+        }
+
+        .method-name {
+            font-size: 0.75rem;
+            color: var(--text-primary);
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .lightbox-close:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        /* LINE Section */
+        .line-section {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .line-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .line-title {
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .line-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+
+        .line-qr {
+            width: 180px;
+            height: 180px;
+            background: white;
+            padding: 10px;
+            margin: 0 auto 1.5rem;
+            border: 2px solid var(--gold);
+        }
+
+        .line-qr img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .line-id {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .contact-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .store-info {
+            text-align: center;
+        }
+
+        .store-address {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .address-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--gold);
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .address-text {
+            color: var(--text-primary);
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .address-note {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .map-container {
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+        }
+
+        .map-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        .map-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-brand {
+            margin-bottom: 1rem;
+        }
+
+        .footer-group {
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+        }
+
+        .footer-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: 0.1em;
+        }
+
+        .footer-tagline {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin: 1rem 0;
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                overflow: visible;
+            }
+
+            .header-content {
+                padding: 0.8rem 1rem;
+                width: 100%;
+                max-width: 100vw;
+                box-sizing: border-box;
+            }
+
+            .logo {
+                flex: 1;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            .logo-group {
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+            }
+
+            .logo-brand {
+                font-size: 1.1rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: 100%;
+            }
+
+            .menu-toggle {
+                display: flex;
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 35px;
+                height: 35px;
+                z-index: 101;
+                background: transparent;
+                border-radius: 4px;
+                padding: 6px;
+                flex-shrink: 0;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                z-index: 200;
+                padding: 0 1rem;
+                border-bottom: 1px solid transparent;
+            }
+
+            nav.active {
+                max-height: 400px;
+                padding: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            nav a {
+                font-size: 1rem;
+                letter-spacing: 0.1em;
+                padding: 1rem 0.5rem;
+                display: block;
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+            }
+
+            nav a:last-child {
+                border-bottom: none;
+            }
+
+            nav a:active {
+                background: rgba(201, 169, 98, 0.1);
+            }
+
+            .nav-label {
+                display: none;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+                min-height: 50vh;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .filter-section {
+                padding: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .products-section {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .product-info {
+                padding: 0.5rem;
+            }
+
+            .product-name {
+                font-size: 0.75rem;
+            }
+
+            .product-feature {
+                font-size: 0.6rem;
+            }
+
+            .product-price {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.15s; }
+        .product-card:nth-child(3) { animation-delay: 0.2s; }
+        .product-card:nth-child(4) { animation-delay: 0.25s; }
+        .product-card:nth-child(5) { animation-delay: 0.3s; }
+        .product-card:nth-child(6) { animation-delay: 0.35s; }
+
+        /* 公告欄 */
+        .price-notice {
+            max-width: 1400px;
+            margin: 0 auto 0.8rem;
+            padding: 0.6rem 1rem;
+            background: rgba(201, 169, 98, 0.08);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--gold-light);
+        }
+
+        .price-notice-icon {
+            font-size: 1rem;
+        }
+
+        /* 定價品標籤 */
+        .fixed-price-tag {
+            position: absolute;
+            top: 0.8rem;
+            left: 0.8rem;
+            background: rgba(120, 120, 120, 0.9);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            letter-spacing: 0.05em;
+            z-index: 2;
+            cursor: help;
+        }
+
+        .fixed-price-tag::after {
+            content: '不適用身份折扣，可累計滿額折扣';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.3rem;
+            background: rgba(30, 30, 30, 0.95);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 0.4rem 0.5rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .fixed-price-tag:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 影片圖示 */
+        .video-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 26px;
+            height: 26px;
+            background: rgba(201, 169, 98, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .video-badge::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 8px solid var(--bg-primary);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            margin-left: 2px;
+        }
+
+        .product-card:hover .video-badge {
+            transform: scale(1.1);
+            background: var(--gold);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <img src="../themore-logo.jpg" alt="樂莫集團" class="logo-img">
+                <div class="logo-text">
+                    <span class="logo-group">樂莫集團 The More</span>
+                    <span class="logo-brand">摩瑪建材 more materials<span>+</span></span>
+                </div>
+            </a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <nav id="nav">
+            <a href="../index.html" onclick="closeMenu()">首頁</a>
+            <span class="nav-label">產品照片及定價連結</span>
+            <a href="../門用五金/index.html" onclick="closeMenu()">門用五金</a>
+            <a href="#products" onclick="closeMenu()">電子鎖</a>
+            <a href="../基礎五金/index.html" onclick="closeMenu()">基礎五金</a>
+            <a href="../輕奢石/index.html" onclick="closeMenu()">輕奢石</a>
+            <a href="#contact" onclick="closeMenu()">聯絡我們</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">Premium Smart Lock</p>
+            <h1 class="hero-title"><span>智能電子鎖</span></h1>
+            <p class="hero-desc">多達8種解鎖方式，WiFi遠端控制標配<br>3D人臉辨識+掌紋技術，安全防偽更放心</p>
+            <div class="hero-line"></div>
+        </div>
+    </section>
+
+    <!-- Filter -->
+    <section class="filter-section">
+        <div class="price-notice">
+            <span class="price-notice-icon">ℹ️</span>
+            <span>NT$1,000 以下商品為<strong>定價品</strong>，不適用身份折扣，可累計滿額折扣</span>
+        </div>
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">全部商品</button>
+            <button class="filter-btn" data-filter="飯店鎖">飯店鎖系列</button>
+            <button class="filter-btn" data-filter="智能鎖">智能鎖系列</button>
+            <button class="filter-btn" data-filter="配件">配件</button>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section" id="products">
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be injected by JS -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="line-section" id="contact">
+        <div class="contact-wrapper">
+            <!-- Store Info -->
+            <div class="store-info">
+                <p class="line-title">Visit Us</p>
+                <h2 class="line-subtitle">摩瑪建材 台中南興店</h2>
+                <div class="store-address">
+                    <svg class="address-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <div>
+                        <p class="address-text">台中市北屯區軍福19路476號</p>
+                        <p class="address-note">(南興公園停車場正對面)</p>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3639.8!2d120.6847!3d24.1847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDExJzA0LjkiTiAxMjDCsDQxJzA0LjkiRQ!5e0!3m2!1szh-TW!2stw!4v1700000000000!5m2!1szh-TW!2stw"
+                        width="100%"
+                        height="250"
+                        style="border:0; border-radius: 4px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=台中市北屯區軍福19路476號" target="_blank" class="map-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    在 Google Map 中開啟
+                </a>
+            </div>
+
+            <!-- LINE QR -->
+            <div class="line-container">
+                <p class="line-title">Contact Us</p>
+                <h2 class="line-subtitle">加入官方 LINE</h2>
+                <div class="line-qr">
+                    <img src="LINE@_QR.jpg" alt="LINE QR Code">
+                </div>
+                <p class="line-id">掃描 QR Code 加入官方 LINE<br>發貼圖 立即諮詢</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">
+            <p class="footer-group">樂莫集團 The More</p>
+            <p class="footer-name">摩瑪建材 more materials+</p>
+        </div>
+        <p class="footer-tagline">義大利設計美學 · 德國工藝品質 · 用新式建材改變台灣裝修生態</p>
+        <p class="footer-copyright">© 2026 摩瑪建材產品資訊網站. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <img id="lightboxImg" src="" alt="">
+            <div class="lightbox-info">
+                <div class="lightbox-fixed-info" id="lightboxFixedInfo">
+                    <span class="lightbox-fixed-tag">定價品</span>
+                    <span class="lightbox-fixed-note">不適用身份折扣，可累計滿額折扣</span>
+                </div>
+                <p class="lightbox-name" id="lightboxName"></p>
+                <p class="lightbox-price" id="lightboxPrice"></p>
+                <p class="lightbox-feature" id="lightboxFeature"></p>
+                <div class="lightbox-methods" id="lightboxMethods"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            {
+                name: '商旅 M-H1', price: 10800, category: '飯店鎖',
+                feature: '刷卡感應/鑰匙・分體式',
+                img: 'images/摩瑪_商旅_M-H1.png',
+                methods: [
+                    { icon: '💳', name: '刷卡感應' },
+                    { icon: '🔑', name: '鑰匙' }
+                ]
+            },
+            {
+                name: '菁英 M-H2', price: 12800, category: '飯店鎖',
+                feature: '刷卡感應/鑰匙・一體式',
+                img: 'images/摩瑪_菁英_M-H2.png',
+                methods: [
+                    { icon: '💳', name: '刷卡感應' },
+                    { icon: '🔑', name: '鑰匙' }
+                ]
+            },
+            {
+                name: '慧眼 M-S1', price: 20800, category: '智能鎖',
+                feature: '6種解鎖方式・WiFi遠端標配',
+                img: 'images/摩瑪_慧眼_M-S1.png',
+                hasVideo: true,
+                methods: [
+                    { icon: '👁️', name: '貓眼' },
+                    { icon: '👆', name: '指紋' },
+                    { icon: '🔢', name: '密碼' },
+                    { icon: '💳', name: '刷卡' },
+                    { icon: '📱', name: 'App' },
+                    { icon: '🔑', name: '鑰匙' }
+                ]
+            },
+            {
+                name: '識界 M-F1', price: 23800, category: '智能鎖',
+                feature: '8種解鎖方式・3D人臉辨識',
+                img: 'images/摩瑪_識界_M-F1.png',
+                hasVideo: true,
+                methods: [
+                    { icon: '👁️', name: '貓眼' },
+                    { icon: '😊', name: '人臉' },
+                    { icon: '🖐️', name: '掌紋' },
+                    { icon: '👆', name: '指紋' },
+                    { icon: '🔢', name: '密碼' },
+                    { icon: '💳', name: '刷卡' },
+                    { icon: '📱', name: 'App' },
+                    { icon: '🔑', name: '鑰匙' }
+                ]
+            },
+            {
+                name: '識界 M-F2 旗艦款', price: 26800, category: '智能鎖',
+                feature: '8種解鎖方式・旗艦頂級款',
+                img: 'images/摩瑪_識界旗艦_M-F2.png',
+                hasVideo: true,
+                methods: [
+                    { icon: '👁️', name: '貓眼' },
+                    { icon: '😊', name: '人臉' },
+                    { icon: '🖐️', name: '掌紋' },
+                    { icon: '👆', name: '指紋' },
+                    { icon: '🔢', name: '密碼' },
+                    { icon: '💳', name: '刷卡' },
+                    { icon: '📱', name: 'App' },
+                    { icon: '🔑', name: '鑰匙' }
+                ]
+            },
+            {
+                name: '發卡機', price: 7800, category: '配件',
+                feature: '飯店鎖專用讀卡器',
+                img: 'images/發卡機.jpg',
+                methods: [
+                    { icon: '💳', name: '發卡' },
+                    { icon: '🔧', name: '設定' }
+                ]
+            }
+        ];
+
+        function formatPrice(price) {
+            return price.toLocaleString();
+        }
+
+        let currentFilter = 'all';
+
+        function renderProducts(filter = 'all') {
+            currentFilter = filter;
+            const grid = document.getElementById('productsGrid');
+
+            let filtered = filter === 'all'
+                ? products.map((p, i) => ({ ...p, originalIndex: i }))
+                : products.map((p, i) => ({ ...p, originalIndex: i })).filter(p => p.category === filter);
+
+            grid.innerHTML = filtered.map((product, index) => `
+                <div class="product-card"
+                     onclick="openLightbox(${product.originalIndex})"
+                     style="animation-delay: ${0.1 + (index % 6) * 0.05}s">
+                    <div class="product-image">
+                        ${product.price < 1000 ? '<span class="fixed-price-tag">定價品</span>' : ''}
+                        ${product.hasVideo ? '<span class="video-badge" title="點擊觀看影片"></span>' : ''}
+                        <img src="${product.img}"
+                             alt="${product.name}"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="placeholder" style="display:none;">敬請期待</div>
+                        <div class="zoom-icon">
+                            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-feature">${product.feature}</p>
+                        <p class="product-price">${formatPrice(product.price)}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProducts(btn.dataset.filter);
+            });
+        });
+
+        // Lightbox
+        function openLightbox(productIndex) {
+            const product = products[productIndex];
+            const lightbox = document.getElementById('lightbox');
+
+            document.getElementById('lightboxImg').src = product.img;
+            document.getElementById('lightboxName').textContent = product.name;
+            document.getElementById('lightboxPrice').textContent = `NT$ ${formatPrice(product.price)}`;
+            document.getElementById('lightboxFeature').textContent = product.feature;
+
+            // 顯示/隱藏定價品標籤
+            const fixedInfo = document.getElementById('lightboxFixedInfo');
+            if (product.price < 1000) {
+                fixedInfo.classList.add('show');
+            } else {
+                fixedInfo.classList.remove('show');
+            }
+
+            // 渲染解鎖方式
+            const methodsHtml = product.methods.map(m => `
+                <div class="method-item">
+                    <span class="method-icon">${m.icon}</span>
+                    <span class="method-name">${m.name}</span>
+                </div>
+            `).join('');
+            document.getElementById('lightboxMethods').innerHTML = methodsHtml;
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Initial render
+        renderProducts();
+
+        // Hamburger Menu
+        function toggleMenu() {
+            document.querySelector('.menu-toggle').classList.toggle('active');
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.querySelector('.menu-toggle').classList.remove('active');
+            document.getElementById('nav').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摩瑪建材產品資訊網站 | 基礎五金</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --gold: #c9a962;
+            --gold-light: #e8d5a3;
+            --gold-dark: #8b7355;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666;
+            --border: rgba(201, 169, 98, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Noto Serif TC', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.9) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 桌面版 nav 定位 */
+        @media (min-width: 769px) {
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .header-content {
+                flex: 1;
+                max-width: none;
+            }
+
+            header nav {
+                position: absolute;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo:visited .logo-group {
+            color: var(--gold);
+        }
+
+        .logo:visited .logo-brand {
+            color: var(--text-primary);
+        }
+
+        .logo:visited .logo-brand span {
+            color: var(--gold);
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .logo-group {
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        .logo-brand {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .logo-brand span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .nav-label {
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            padding-right: 1rem;
+            border-right: 1px solid var(--border);
+            margin-right: 0.5rem;
+        }
+
+        /* Hamburger Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
+                linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 169, 98, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', 'Noto Serif TC', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: var(--gold);
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            background: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-family: 'Noto Serif TC', serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            letter-spacing: 0.1em;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        .filter-parent {
+            position: relative;
+        }
+
+        .filter-parent.expanded {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        .sub-filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 0;
+            background: rgba(184, 156, 102, 0.1);
+            border-radius: 4px;
+        }
+
+        .sub-filter {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-primary);
+        }
+
+        /* Products Grid */
+        .products-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            border-color: var(--gold);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 40px rgba(201, 169, 98, 0.15);
+            z-index: 10;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-image {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #1f1f1f 0%, #0f0f0f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        .product-image .placeholder {
+            font-size: 2rem;
+            color: var(--gold-dark);
+            opacity: 0.3;
+        }
+
+        .zoom-icon {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 169, 98, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s;
+        }
+
+        .zoom-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--bg-primary);
+        }
+
+        .product-card:hover .zoom-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* 影片圖示 */
+        .video-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            width: 26px;
+            height: 26px;
+            background: rgba(201, 169, 98, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .video-badge::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 8px solid var(--bg-primary);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            margin-left: 2px;
+        }
+
+        .product-card:hover .video-badge {
+            transform: scale(1.1);
+            background: var(--gold);
+        }
+
+        .product-info {
+            padding: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-name {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+
+        .product-price::before {
+            content: 'NT$ ';
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border: 1px solid var(--border);
+        }
+
+        .lightbox-info {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-top: none;
+        }
+
+        .lightbox-fixed-info {
+            display: none;
+            margin-bottom: 0.8rem;
+        }
+
+        .lightbox-fixed-info.show {
+            display: block;
+        }
+
+        .lightbox-fixed-tag {
+            display: inline-block;
+            background: rgba(120, 120, 120, 0.9);
+            color: #fff;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+        }
+
+        .lightbox-fixed-note {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 0.4rem;
+        }
+
+        .lightbox-name {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .lightbox-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        /* Contact Section */
+        .line-section {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .store-info {
+            text-align: center;
+        }
+
+        .line-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .line-title {
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .line-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+
+        .store-address {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .address-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--gold);
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .address-text {
+            color: var(--text-primary);
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .address-note {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        .map-container {
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+        }
+
+        .map-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        .map-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .line-qr {
+            width: 180px;
+            height: 180px;
+            background: white;
+            padding: 10px;
+            margin: 0 auto 1.5rem;
+            border: 2px solid var(--gold);
+        }
+
+        .line-qr img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .line-id {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-brand {
+            margin-bottom: 1rem;
+        }
+
+        .footer-group {
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+        }
+
+        .footer-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: 0.1em;
+        }
+
+        .footer-tagline {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin: 1rem 0;
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                overflow: visible;
+            }
+
+            .header-content {
+                padding: 0.8rem 1rem;
+                width: 100%;
+                max-width: 100vw;
+                box-sizing: border-box;
+            }
+
+            .logo {
+                flex: 1;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            .logo-group {
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+            }
+
+            .logo-brand {
+                font-size: 1.1rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: 100%;
+            }
+
+            .menu-toggle {
+                display: flex;
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 35px;
+                height: 35px;
+                z-index: 101;
+                background: transparent;
+                border-radius: 4px;
+                padding: 6px;
+                flex-shrink: 0;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                z-index: 200;
+                padding: 0 1rem;
+                border-bottom: 1px solid transparent;
+            }
+
+            nav.active {
+                max-height: 400px;
+                padding: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            nav a {
+                font-size: 1rem;
+                letter-spacing: 0.1em;
+                padding: 1rem 0.5rem;
+                display: block;
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid rgba(201, 169, 98, 0.15);
+            }
+
+            nav a:last-child {
+                border-bottom: none;
+            }
+
+            nav a:active {
+                background: rgba(201, 169, 98, 0.1);
+            }
+
+            .nav-label {
+                display: none;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+                min-height: 50vh;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .filter-section {
+                padding: 1rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .products-section {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            .product-info {
+                padding: 0.5rem;
+            }
+
+            .product-name {
+                font-size: 0.7rem;
+            }
+
+            .product-price {
+                font-size: 0.9rem;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.15s; }
+        .product-card:nth-child(3) { animation-delay: 0.2s; }
+        .product-card:nth-child(4) { animation-delay: 0.25s; }
+        .product-card:nth-child(5) { animation-delay: 0.3s; }
+        .product-card:nth-child(6) { animation-delay: 0.35s; }
+        .product-card:nth-child(7) { animation-delay: 0.4s; }
+        .product-card:nth-child(8) { animation-delay: 0.45s; }
+
+        /* 公告欄 */
+        .price-notice {
+            max-width: 1400px;
+            margin: 0 auto 0.8rem;
+            padding: 0.6rem 1rem;
+            background: rgba(201, 169, 98, 0.08);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--gold-light);
+        }
+
+        .price-notice-icon {
+            font-size: 1rem;
+        }
+
+        /* 定價品標籤 */
+        .fixed-price-tag {
+            position: absolute;
+            top: 0.8rem;
+            left: 0.8rem;
+            background: rgba(120, 120, 120, 0.9);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            letter-spacing: 0.05em;
+            z-index: 2;
+            cursor: help;
+        }
+
+        .fixed-price-tag::after {
+            content: '不適用身份折扣，可累計滿額折扣';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.3rem;
+            background: rgba(30, 30, 30, 0.95);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 0.4rem 0.5rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .fixed-price-tag:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <img src="../themore-logo.jpg" alt="樂莫集團" class="logo-img">
+                <div class="logo-text">
+                    <span class="logo-group">樂莫集團 The More</span>
+                    <span class="logo-brand">摩瑪建材 more materials<span>+</span></span>
+                </div>
+            </a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <nav id="nav">
+            <a href="../index.html" onclick="closeMenu()">首頁</a>
+            <span class="nav-label">產品照片及定價連結</span>
+            <a href="../門用五金/index.html" onclick="closeMenu()">門用五金</a>
+            <a href="../電子鎖/index.html" onclick="closeMenu()">電子鎖</a>
+            <a href="#products" onclick="closeMenu()">基礎五金</a>
+            <a href="../輕奢石/index.html" onclick="closeMenu()">輕奢石</a>
+            <a href="#contact" onclick="closeMenu()">聯絡我們</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">Premium Basic Hardware</p>
+            <h1 class="hero-title"><span>基礎五金</span></h1>
+            <p class="hero-desc">義大利設計美學，德國工藝品質<br>為您的空間注入優雅與品味</p>
+            <div class="hero-line"></div>
+        </div>
+    </section>
+
+    <!-- Filter -->
+    <section class="filter-section">
+        <div class="price-notice">
+            <span class="price-notice-icon">ℹ️</span>
+            <span>NT$1,000 以下商品為<strong>定價品</strong>，不適用身份折扣，可累計滿額折扣</span>
+        </div>
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">全部商品</button>
+            <button class="filter-btn filter-parent" data-filter="全部十字暗鉸鏈" data-subs="crossHingeSubs" data-display="十字暗鉸鏈(隱藏式)" onclick="toggleSubFilters(this)">十字暗鉸鏈(隱藏式) ▼</button>
+            <button class="filter-btn filter-parent" data-filter="合頁" data-subs="hingeSubs" data-display="合頁(外露式)" onclick="toggleSubFilters(this)">合頁(外露式) ▼</button>
+            <button class="filter-btn filter-parent" data-filter="門擋門吸" data-subs="doorStopSubs" data-display="門擋門吸" onclick="toggleSubFilters(this)">門擋門吸 ▼</button>
+            <button class="filter-btn filter-parent" data-filter="門用配件" data-subs="doorAccessorySubs" data-display="門用配件" onclick="toggleSubFilters(this)">門用配件 ▼</button>
+            <button class="filter-btn filter-parent" data-filter="旋轉門五金" data-subs="pivotDoorSubs" data-display="旋轉門五金" onclick="toggleSubFilters(this)">旋轉門五金 ▼</button>
+            <button class="filter-btn filter-parent" data-filter="西德鉸鏈" data-subs="germanyHingeSubs" data-display="西德鉸鏈" onclick="toggleSubFilters(this)">西德鉸鏈 ▼</button>
+            <button class="filter-btn filter-parent" data-filter="滑軌" data-subs="slideRailSubs" data-display="抽屜滑軌" onclick="toggleSubFilters(this)">抽屜滑軌 ▼</button>
+        </div>
+        <div class="sub-filter-container" id="crossHingeSubs" style="display: none;">
+            <button class="filter-btn sub-filter" data-filter="十字暗鉸鏈">三維緩衝十字暗鉸鏈</button>
+            <button class="filter-btn sub-filter" data-filter="三維十字暗鉸鏈">三維承重十字暗鉸鏈(搭配緩衝)</button>
+            <button class="filter-btn sub-filter" data-filter="三維普通十字暗鉸鏈">三維十字暗鉸鏈</button>
+            <button class="filter-btn sub-filter" data-filter="特殊十字暗鉸鏈">特殊十字暗鉸鏈</button>
+            <button class="filter-btn sub-filter" data-filter="二維暗鉸鏈">二維十字暗鉸鏈(門框免開槽)</button>
+            <button class="filter-btn sub-filter" data-filter="開槽模具">十字暗鉸鏈開槽模具</button>
+        </div>
+        <div class="sub-filter-container" id="hingeSubs" style="display: none;">
+            <button class="filter-btn sub-filter" data-filter="液壓合頁">五吋液壓合頁</button>
+            <button class="filter-btn sub-filter" data-filter="承重合頁">五吋承重合頁(搭配液壓)</button>
+            <button class="filter-btn sub-filter" data-filter="一般合頁">四吋一般合頁</button>
+        </div>
+        <div class="sub-filter-container" id="doorStopSubs" style="display: none;">
+            <button class="filter-btn sub-filter" data-filter="緩衝地吸">緩衝地吸</button>
+            <button class="filter-btn sub-filter" data-filter="基礎磁吸">基礎磁吸</button>
+            <button class="filter-btn sub-filter" data-filter="防風地吸">防風地吸</button>
+            <button class="filter-btn sub-filter" data-filter="明裝磁吸">明裝磁吸</button>
+            <button class="filter-btn sub-filter" data-filter="磁鐵門擋">磁鐵門擋</button>
+            <button class="filter-btn sub-filter" data-filter="橡膠門擋">橡膠門擋</button>
+        </div>
+        <div class="sub-filter-container" id="doorAccessorySubs" style="display: none;">
+            <button class="filter-btn sub-filter" data-filter="門下靜音條">門下靜音條</button>
+            <button class="filter-btn sub-filter" data-filter="拍拍手">拍拍手</button>
+            <button class="filter-btn sub-filter" data-filter="甲蟲">甲蟲</button>
+            <button class="filter-btn sub-filter" data-filter="油壓支撐桿">油壓支撐桿</button>
+        </div>
+        <div class="sub-filter-container" id="germanyHingeSubs" style="display: none;">
+            <button class="filter-btn sub-filter" data-filter="西德短腿">西德鉸鏈(短腿)</button>
+            <button class="filter-btn sub-filter" data-filter="西德常規兩孔">西德鉸鏈(常規兩孔底座)</button>
+            <button class="filter-btn sub-filter" data-filter="西德常規四孔">西德鉸鏈(常規四孔底座)</button>
+            <button class="filter-btn sub-filter" data-filter="西德特殊">西德鉸鏈(特殊)</button>
+            <button class="filter-btn sub-filter" data-filter="西德大角度">西德鉸鏈(大角度)</button>
+        </div>
+        <div class="sub-filter-container" id="slideRailSubs" style="display: none;">
+            <button class="filter-btn sub-filter" data-filter="三節緩衝滑軌">三節緩衝滑軌</button>
+            <button class="filter-btn sub-filter" data-filter="三節彈壓滑軌">三節彈壓滑軌</button>
+            <button class="filter-btn sub-filter" data-filter="三節座式緩衝滑軌">三節座式緩衝滑軌</button>
+            <button class="filter-btn sub-filter" data-filter="三節座式彈壓滑軌">三節座式彈壓滑軌</button>
+        </div>
+        <div class="sub-filter-container" id="pivotDoorSubs" style="display: none;">
+            <button class="filter-btn sub-filter" data-filter="中軸門">中軸門</button>
+            <button class="filter-btn sub-filter" data-filter="偏軸門">偏軸門</button>
+            <button class="filter-btn sub-filter" data-filter="中偏軸門">中偏軸門</button>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section" id="products">
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be injected by JS -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="line-section" id="contact">
+        <div class="contact-wrapper">
+            <!-- Store Info -->
+            <div class="store-info">
+                <p class="line-title">Visit Us</p>
+                <h2 class="line-subtitle">摩瑪建材 台中南興店</h2>
+                <div class="store-address">
+                    <svg class="address-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <div>
+                        <p class="address-text">台中市北屯區軍福19路476號</p>
+                        <p class="address-note">(南興公園停車場正對面)</p>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3639.8!2d120.6847!3d24.1847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDExJzA0LjkiTiAxMjDCsDQxJzA0LjkiRQ!5e0!3m2!1szh-TW!2stw!4v1700000000000!5m2!1szh-TW!2stw"
+                        width="100%"
+                        height="250"
+                        style="border:0; border-radius: 4px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <a href="https://www.google.com/maps/search/台中市北屯區軍福19路476號" target="_blank" class="map-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    在 Google Map 中開啟
+                </a>
+            </div>
+
+            <!-- LINE QR -->
+            <div class="line-container">
+                <p class="line-title">Contact Us</p>
+                <h2 class="line-subtitle">加入官方 LINE</h2>
+                <div class="line-qr">
+                    <img src="LINE@_QR.jpg" alt="LINE QR Code">
+                </div>
+                <p class="line-id">掃描 QR Code 加入官方 LINE<br>發貼圖 立即諮詢</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">
+            <p class="footer-group">樂莫集團 The More</p>
+            <p class="footer-name">摩瑪建材 more materials+</p>
+        </div>
+        <p class="footer-tagline">義大利設計美學 · 德國工藝品質 · 用新式建材改變台灣裝修生態</p>
+        <p class="footer-copyright">© 2026 摩瑪建材產品資訊網站. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <img id="lightboxImg" src="" alt="">
+            <div class="lightbox-info">
+                <div class="lightbox-fixed-info" id="lightboxFixedInfo">
+                    <span class="lightbox-fixed-tag">定價品</span>
+                    <span class="lightbox-fixed-note">不適用身份折扣，可累計滿額折扣</span>
+                </div>
+                <p class="lightbox-name" id="lightboxName"></p>
+                <p class="lightbox-price" id="lightboxPrice"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Product Data - 基礎五金（摩瑪品名 + 牌價 + 庫存）- 完整版
+        // stock 欄位供購物車系統使用，前端不顯示
+        const products = [
+            // ========== 三維(緩衝)十字暗鉸鏈 ==========
+            { name: "免開_三維緩衝十字暗鉸鏈S3D_黑鎳", price: 6380, category: "十字暗鉸鏈", img: "免開_三維緩衝十字暗絞鏈S3D_01.JPG", stock: 0 },
+            { name: "半開_三維緩衝十字暗鉸鏈N3D_黑鎳", price: 6180, category: "十字暗鉸鏈", img: "半開_三維緩衝十字暗絞鏈N3D_01.JPG", stock: 0 },
+            { name: "全開_三維緩衝十字暗鉸鏈H3D_黑鎳", price: 5980, category: "十字暗鉸鏈", img: "全開_三維緩衝十字暗絞鏈H3D_01.JPG", stock: 0 },
+            { name: "40KG三維暗鉸鏈_槍灰", price: 680, category: "三維普通十字暗鉸鏈", img: "", stock: 24 },
+            { name: "40KG三維暗鉸鏈_銀色", price: 680, category: "三維普通十字暗鉸鏈", img: "", stock: 24 },
+
+            // ========== 特殊十字暗鉸鏈 ==========
+            { name: "免開_三維承重十字暗鉸鏈S3D_黑鎳", price: 3380, category: "三維十字暗鉸鏈", img: "免開_三維緩衝十字暗絞鏈S3D_02.JPG", stock: 0 },
+            { name: "半開_三維承重十字暗鉸鏈N3D_黑鎳", price: 3180, category: "三維十字暗鉸鏈", img: "半開_三維緩衝十字暗絞鏈N3D_02.JPG", stock: 0 },
+            { name: "全開_三維承重十字暗鉸鏈H3D_黑鎳", price: 2980, category: "三維十字暗鉸鏈", img: "全開_三維緩衝十字暗絞鏈H3D_02.JPG", stock: 0 },
+            { name: "普_三維十字暗鉸鏈30K_卡其", price: 780, category: "三維普通十字暗鉸鏈", img: "普＿三維十字暗鉸鏈.jpg", stock: 0 },
+            { name: "6KG小十字暗鉸鏈_槍灰", price: 200, category: "特殊十字暗鉸鏈", img: "", stock: 120 },
+            { name: "6KG小十字暗鉸鏈_銀色", price: 200, category: "特殊十字暗鉸鏈", img: "", stock: 0 },
+
+            // ========== 二維十字暗鉸鏈 ==========
+            { name: "30KG二維暗鉸鏈_銀色", price: 580, category: "二維暗鉸鏈", img: "", stock: 24 },
+
+            // ========== 液壓合頁 ==========
+            { name: "五吋_自動回歸合頁5H_黑", price: 1680, category: "液壓合頁", img: "五寸液壓緩衝活頁.jpg", stock: 0 },
+
+            // ========== 一般合頁 ==========
+            { name: "五吋_承重合頁5B_黑", price: 1000, category: "承重合頁", img: "", stock: 0 },
+            { name: "四吋_極簡合頁(兩片裝)_白鐵", price: 200, category: "一般合頁", img: "四吋_極簡合頁(兩片裝)_啞黑01.jpg", stock: 0 },
+
+            // ========== 門擋門吸 ==========
+            // 緩衝地吸829
+            { name: "緩衝地吸829_啞黑", price: 498, category: "緩衝地吸", img: "液壓地吸01.jpg", stock: 0 },
+            // 基礎磁吸806
+            { name: "基礎磁吸806_白鐵", price: 228, category: "基礎磁吸", img: "基礎磁吸806/基礎磁吸806_白鐵.jpg", stock: 0 },
+            { name: "基礎磁吸806_黑鎳", price: 228, category: "基礎磁吸", img: "", stock: 0 },
+            { name: "基礎磁吸806_金絲", price: 248, category: "基礎磁吸", img: "基礎磁吸806/基礎磁吸806_金絲.jpg", stock: 0 },
+            { name: "基礎磁吸806_卡其", price: 248, category: "基礎磁吸", img: "", stock: 0 },
+            // 防風地吸828
+            { name: "防風地吸828_白鐵", price: 458, category: "防風地吸", img: "防風地吸828/防風地吸828_白鐵.jpg", stock: 0 },
+            { name: "防風地吸828_金絲", price: 498, category: "防風地吸", img: "防風地吸828/防風地吸828_金絲.jpg", stock: 0 },
+            { name: "防風地吸828_黑鎳", price: 458, category: "防風地吸", img: "", stock: 0 },
+            // 明裝磁吸02
+            { name: "明裝磁吸02_白鐵", price: 358, category: "明裝磁吸", img: "", stock: 0 },
+            // 磁鐵門擋104
+            { name: "磁鐵門擋104_卡其", price: 218, category: "磁鐵門擋", img: "", stock: 0 },
+            { name: "磁鐵門擋104_白鐵", price: 198, category: "磁鐵門擋", img: "磁鐵門擋104/磁鐵門擋104_白鐵.jpg", stock: 0 },
+            { name: "磁鐵門擋104_黑鎳", price: 198, category: "磁鐵門擋", img: "", stock: 0 },
+            // 橡膠門擋008
+            { name: "橡膠門擋008_白鐵", price: 178, category: "橡膠門擋", img: "橡膠門擋008/橡膠門擋008_白鐵.jpg", stock: 0 },
+
+            // ========== 門用配件 ==========
+            { name: "門下靜音條", price: 868, category: "門下靜音條", img: "JYT-SY門下靜音條/門下靜音條01.jpg", stock: 0 },
+
+            // ========== 西德鉸鏈(常規) ==========
+            // BG系列 (百妥適)
+            { name: "櫃用_美式內開門鉸鏈BG112", price: 75, category: "西德特殊", img: "櫃用_美式內開門鉸鏈BG11201.JPG", stock: 300, hasVideo: true },
+            { name: "櫃用_極窄淺櫃超短腿BG059", price: 65, category: "西德短腿", img: "櫃用_極窄淺櫃超短腿BG05901.JPG", stock: 200 },
+            { name: "櫃用_短腿鉸鏈BG069_蓋六分", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG", stock: 50 },
+            { name: "櫃用_短腿鉸鏈BG069_蓋三分", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG", stock: 100 },
+            { name: "櫃用_短腿鉸鏈BG069_入柱", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG", stock: 50 },
+            // E系列 (宇時和) - 兩孔底座
+            { name: "快拆兩孔/蓋六/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: "", stock: 0 },
+            { name: "快拆兩孔/蓋三/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: "", stock: 0 },
+            { name: "快拆兩孔/入柱/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: "", stock: 0 },
+            // K1系列 (宇時和) - 四孔底座 - 有庫存
+            { name: "快拆四孔/蓋六/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: "", stock: 400 },
+            { name: "快拆四孔/蓋三/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: "", stock: 200 },
+            { name: "快拆四孔/入柱/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: "", stock: 200 },
+            // K2系列 (宇時和) - 四孔底座
+            { name: "固定四孔/蓋六/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: "", stock: 0 },
+            { name: "固定四孔/蓋三/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: "", stock: 0 },
+            { name: "固定四孔/入柱/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: "", stock: 0 },
+            { name: "快拆四孔/蓋六/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: "", stock: 0 },
+            { name: "快拆四孔/蓋三/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: "", stock: 0 },
+            { name: "快拆四孔/入柱/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: "", stock: 0 },
+            // 櫃用配件 (宇時和)
+            { name: "櫃用_拍拍手開關", price: 55, category: "拍拍手", img: "櫃用_拍拍手開關01.JPG", stock: 0 },
+            { name: "櫃用_甲蟲碰珠", price: 320, category: "甲蟲", img: "櫃用_甲蟲碰珠.JPG", stock: 0 },
+            { name: "櫃用_上掀油壓桿", price: 180, category: "油壓支撐桿", img: "", stock: 0 },
+            { name: "櫃用_下翻油壓桿", price: 220, category: "油壓支撐桿", img: "櫃用_上掀油壓桿_百.JPG", stock: 0 },
+
+            // ========== 西德鉸鏈(特殊) ==========
+            { name: "快拆四孔/吋15/135特殊鉸鏈", price: 140, category: "西德特殊", img: "", stock: 118 },
+            { name: "快拆四孔/吋15/90特殊鉸鏈", price: 140, category: "西德特殊", img: "", stock: 200 },
+            { name: "快拆四孔/吋15/45特殊鉸鏈", price: 140, category: "西德特殊", img: "", stock: 0 },
+            { name: "快拆四孔/吋15/30特殊鉸鏈", price: 140, category: "西德特殊", img: "", stock: 0 },
+
+            // ========== 西德鉸鏈(大角度) ==========
+            { name: "快拆四孔/155厚門/緩衝鉸鏈_蓋六", price: 180, category: "西德大角度", img: "", stock: 212 },
+            { name: "快拆四孔/155厚門/緩衝鉸鏈_蓋三", price: 180, category: "西德大角度", img: "", stock: 0 },
+            { name: "快拆四孔/155厚門/緩衝鉸鏈_入柱", price: 180, category: "西德大角度", img: "", stock: 200 },
+            { name: "快拆四孔/155厚門/無阻力鉸鏈_蓋六", price: 180, category: "西德大角度", img: "", stock: 0 },
+            { name: "快拆四孔/155厚門/無阻力鉸鏈_蓋三", price: 180, category: "西德大角度", img: "", stock: 0 },
+            { name: "快拆四孔/155厚門/無阻力鉸鏈_入柱", price: 180, category: "西德大角度", img: "", stock: 0 },
+            { name: "快拆四孔/180厚門/緩衝鉸鏈_蓋六", price: 220, category: "西德大角度", img: "", stock: 0 },
+            { name: "快拆四孔/125斜角門/緩衝鉸鏈_蓋六", price: 220, category: "西德特殊", img: "", stock: 0 },
+            { name: "快拆四孔/125斜角門/緩衝鉸鏈_蓋三", price: 220, category: "西德特殊", img: "", stock: 0 },
+            { name: "快拆四孔/125斜角門/緩衝鉸鏈_入柱", price: 220, category: "西德特殊", img: "", stock: 0 },
+
+            // ========== 三節緩衝滑軌 ==========
+            { name: "三節式_緩衝滑軌4510(一對)_25cm", price: 240, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 15 },
+            { name: "三節式_緩衝滑軌4510(一對)_30cm", price: 260, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 30 },
+            { name: "三節式_緩衝滑軌4510(一對)_35cm", price: 280, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 30 },
+            { name: "三節式_緩衝滑軌4510(一對)_40cm", price: 300, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 30 },
+            { name: "三節式_緩衝滑軌4510(一對)_45cm", price: 320, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 30 },
+            { name: "三節式_緩衝滑軌4510(一對)_50cm", price: 340, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 15 },
+
+            // ========== 三節彈壓滑軌 ==========
+            { name: "三節式_彈壓滑軌4510(一對)_25cm", price: 240, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
+            { name: "三節式_彈壓滑軌4510(一對)_30cm", price: 260, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
+            { name: "三節式_彈壓滑軌4510(一對)_35cm", price: 280, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
+            { name: "三節式_彈壓滑軌4510(一對)_40cm", price: 300, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
+            { name: "三節式_彈壓滑軌4510(一對)_45cm", price: 320, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
+            { name: "三節式_彈壓滑軌4510(一對)_50cm", price: 340, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
+
+            // ========== 座式緩衝滑軌 ==========
+            { name: "座式_緩衝滑軌3118(一對)_25cm", price: 400, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 10 },
+            { name: "座式_緩衝滑軌3118(一對)_30cm", price: 440, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 20 },
+            { name: "座式_緩衝滑軌3118(一對)_35cm", price: 480, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 20 },
+            { name: "座式_緩衝滑軌3118(一對)_40cm", price: 520, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 20 },
+            { name: "座式_緩衝滑軌3118(一對)_45cm", price: 560, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 20 },
+            { name: "座式_緩衝滑軌3118(一對)_50cm", price: 600, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 10 },
+            { name: "座式_緩衝滑軌3118(一對)_55cm", price: 640, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 0 },
+
+            // ========== 座式彈壓滑軌 ==========
+            { name: "座式_彈壓滑軌3118(一對)_25cm", price: 400, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
+            { name: "座式_彈壓滑軌3118(一對)_30cm", price: 440, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
+            { name: "座式_彈壓滑軌3118(一對)_35cm", price: 480, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
+            { name: "座式_彈壓滑軌3118(一對)_40cm", price: 520, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
+            { name: "座式_彈壓滑軌3118(一對)_45cm", price: 560, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
+            { name: "座式_彈壓滑軌3118(一對)_50cm", price: 600, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
+            { name: "座式_彈壓滑軌3118(一對)_55cm", price: 640, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
+
+            // ========== 旋轉門五金 ==========
+            { name: "中偏軸兩用天地五金", price: 6300, category: "中偏軸門", img: "", stock: 10 },
+        ];
+
+        const basePath = "images/";
+        let currentFilter = 'all';
+
+        function getImagePath(product) {
+            if (!product.img) return '';
+            return `${basePath}${product.img}`;
+        }
+
+        function formatPrice(price) {
+            return price.toLocaleString();
+        }
+
+        function renderProducts(filter = 'all') {
+            currentFilter = filter;
+            const grid = document.getElementById('productsGrid');
+            let filtered;
+            if (filter === 'all') {
+                filtered = products;
+            } else if (filter === '全部十字暗鉸鏈') {
+                // 顯示所有十字暗鉸鏈產品
+                filtered = products.filter(p => p.category.includes('暗鉸鏈') || p.category.includes('暗鉸鏈'));
+            } else if (filter === '滑軌') {
+                // 顯示所有滑軌類產品
+                filtered = products.filter(p => p.category.includes('滑軌'));
+            } else if (filter === '西德鉸鏈') {
+                // 顯示所有西德鉸鏈產品
+                filtered = products.filter(p => p.category.startsWith('西德'));
+            } else if (filter === '合頁') {
+                // 顯示所有合頁產品
+                filtered = products.filter(p => p.category.includes('合頁'));
+            } else if (filter === '門擋門吸') {
+                // 顯示所有門擋門吸產品
+                filtered = products.filter(p => p.category.includes('地吸') || p.category.includes('磁吸') || p.category.includes('門擋'));
+            } else if (filter === '門用配件') {
+                // 顯示所有門用配件產品
+                filtered = products.filter(p => p.category === '門下靜音條' || p.category === '拍拍手' || p.category === '甲蟲' || p.category === '油壓支撐桿');
+            } else {
+                filtered = products.filter(p => p.category === filter);
+            }
+
+            grid.innerHTML = filtered.map((product, index) => `
+                <div class="product-card"
+                     onclick="openLightbox('${getImagePath(product)}', '${product.name}', ${product.price})"
+                     style="animation-delay: ${0.1 + (index % 8) * 0.05}s">
+                    <div class="product-image">
+                        ${product.price < 1000 ? '<span class="fixed-price-tag">定價品</span>' : ''}
+                        ${product.img ? `
+                        <img src="${getImagePath(product)}"
+                             alt="${product.name}"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="placeholder" style="display:none;">敬請期待</div>
+                        ` : `
+                        <div class="placeholder">敬請期待</div>
+                        `}
+                        ${product.hasVideo ? '<span class="video-badge" title="點擊觀看影片"></span>' : ''}
+                        <div class="zoom-icon">
+                            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">${formatPrice(product.price)}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle sub-filters
+        function toggleSubFilters(parentBtn) {
+            const subsId = parentBtn.dataset.subs;
+            const subContainer = document.getElementById(subsId);
+            const filterName = parentBtn.dataset.filter;
+            const displayName = parentBtn.dataset.display || filterName;
+            const isExpanded = subContainer.style.display !== 'none';
+
+            // 先收合所有其他父分類
+            document.querySelectorAll('.filter-parent').forEach(btn => {
+                if (btn !== parentBtn) {
+                    const otherSubsId = btn.dataset.subs;
+                    const otherSubs = document.getElementById(otherSubsId);
+                    if (otherSubs) {
+                        otherSubs.style.display = 'none';
+                        btn.classList.remove('expanded');
+                        const otherDisplayName = btn.dataset.display || btn.dataset.filter;
+                        btn.textContent = otherDisplayName + ' ▼';
+                    }
+                }
+            });
+
+            if (isExpanded) {
+                subContainer.style.display = 'none';
+                parentBtn.classList.remove('expanded');
+                parentBtn.textContent = displayName + ' ▼';
+            } else {
+                subContainer.style.display = 'flex';
+                parentBtn.classList.add('expanded');
+                parentBtn.textContent = displayName + ' ▲';
+                // 顯示該分類所有產品
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                parentBtn.classList.add('active');
+                renderProducts(filterName);
+            }
+        }
+
+        // 收合所有子分類
+        function collapseAllSubs() {
+            document.querySelectorAll('.filter-parent').forEach(btn => {
+                const subsId = btn.dataset.subs;
+                const subs = document.getElementById(subsId);
+                if (subs) {
+                    subs.style.display = 'none';
+                    btn.classList.remove('expanded');
+                    btn.textContent = btn.dataset.filter + ' ▼';
+                }
+            });
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn:not(.filter-parent)').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // 如果點擊子分類，保持對應父分類展開狀態
+                if (btn.classList.contains('sub-filter')) {
+                    const parentContainer = btn.closest('.sub-filter-container');
+                    const parentId = parentContainer.id;
+                    document.querySelectorAll('.filter-parent').forEach(p => {
+                        if (p.dataset.subs === parentId) {
+                            p.classList.add('expanded');
+                        }
+                    });
+                } else {
+                    // 點擊其他分類時收合所有子分類
+                    collapseAllSubs();
+                }
+                renderProducts(btn.dataset.filter);
+            });
+        });
+
+        // Lightbox
+        function openLightbox(src, name, price) {
+            if (!src) return;
+            const lightbox = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightboxName').textContent = name;
+            document.getElementById('lightboxPrice').textContent = `NT$ ${formatPrice(price)}`;
+
+            // 顯示/隱藏定價品標籤
+            const fixedInfo = document.getElementById('lightboxFixedInfo');
+            if (price < 1000) {
+                fixedInfo.classList.add('show');
+            } else {
+                fixedInfo.classList.remove('show');
+            }
+
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Initial render
+        renderProducts();
+
+        // Hamburger Menu
+        function toggleMenu() {
+            document.querySelector('.menu-toggle').classList.toggle('active');
+            document.getElementById('nav').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.querySelector('.menu-toggle').classList.remove('active');
+            document.getElementById('nav').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
