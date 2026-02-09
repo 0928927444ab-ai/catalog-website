@@ -594,6 +594,58 @@
             color: var(--bg-primary);
         }
 
+        /* Lightbox 左右切換按鈕 */
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+            transition: all 0.3s;
+            border-radius: 50%;
+        }
+        .lightbox-nav:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+        .lightbox-nav.prev { left: 20px; }
+        .lightbox-nav.next { right: 20px; }
+        .lightbox-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .lightbox-nav:disabled:hover {
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--gold);
+        }
+        .lightbox-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--gold);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 1002;
+            letter-spacing: 0.1em;
+        }
+        @media (max-width: 768px) {
+            .lightbox-nav { width: 40px; height: 40px; font-size: 1.2rem; }
+            .lightbox-nav.prev { left: 10px; }
+            .lightbox-nav.next { right: 10px; }
+        }
+
         /* LINE Section */
         .line-section {
             background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
@@ -1018,7 +1070,7 @@
             background: var(--gold);
         }
 
-        /* 低價商品折扣說明浮動按鈕 */
+        /* 低價商品折扣說明浮動按鈕 - 桌面版 hover 顯示 */
         .discount-fab {
             position: fixed;
             bottom: 100px;
@@ -1042,11 +1094,15 @@
             background: var(--bg-card); border: 1px solid var(--gold); border-radius: 16px;
             padding: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 1001;
             opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease;
+            pointer-events: none;
         }
-        .discount-panel.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        /* 桌面版：hover 顯示 */
+        .discount-fab:hover + .discount-panel,
+        .discount-panel:hover { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+        .discount-panel.show { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
         .discount-panel-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
         .discount-panel-header h3 { color: var(--gold); font-size: 16px; font-weight: 600; }
-        .discount-panel-close { margin-left: auto; background: none; border: none; color: var(--text-secondary); font-size: 20px; cursor: pointer; }
+        .discount-panel-close { margin-left: auto; background: none; border: none; color: var(--text-secondary); font-size: 20px; cursor: pointer; display: none; }
         .discount-panel-close:hover { color: var(--text-primary); }
         .discount-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
         .discount-table th, .discount-table td { padding: 10px 8px; text-align: center; font-size: 14px; }
@@ -1057,10 +1113,21 @@
         .discount-note-icon { color: #e53e3e; font-size: 16px; flex-shrink: 0; }
         .discount-note-text { color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
         .discount-note-text strong { color: #e53e3e; }
-        @media (max-width: 480px) {
-            .discount-fab { bottom: 80px; right: 20px; width: 50px; height: 50px; }
-            .discount-fab-icon { font-size: 20px; }
-            .discount-panel { right: 10px; left: 10px; width: auto; bottom: 140px; }
+
+        /* Lightbox 內的折扣說明（手機版顯示） */
+        .lightbox-discount { display: none; margin-top: 16px; padding: 16px; background: rgba(201, 169, 98, 0.08); border: 1px solid var(--gold); border-radius: 12px; }
+        .lightbox-discount-title { color: var(--gold); font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .lightbox-discount-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+        .lightbox-discount-table th, .lightbox-discount-table td { padding: 8px 6px; text-align: center; font-size: 13px; }
+        .lightbox-discount-table th { background: rgba(201, 169, 98, 0.15); color: var(--gold); font-weight: 500; }
+        .lightbox-discount-table td { border-bottom: 1px solid var(--border); }
+        .lightbox-discount-note { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+        .lightbox-discount-note strong { color: #e53e3e; }
+
+        /* 手機版：隱藏浮動按鈕，在 Lightbox 顯示折扣說明 */
+        @media (max-width: 768px) {
+            .discount-fab, .discount-panel { display: none !important; }
+            .lightbox-discount { display: block; }
         }
     </style>
 </head>
@@ -1185,6 +1252,9 @@
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
+        <button class="lightbox-nav prev" onclick="prevProduct()">❮</button>
+        <button class="lightbox-nav next" onclick="nextProduct()">❯</button>
+        <div class="lightbox-counter" id="lightboxCounter">1 / 6</div>
         <div class="lightbox-content">
             <button class="lightbox-close" onclick="closeLightbox()">×</button>
             <img id="lightboxImg" src="" alt="">
@@ -1197,6 +1267,17 @@
                 <p class="lightbox-price" id="lightboxPrice"></p>
                 <p class="lightbox-feature" id="lightboxFeature"></p>
                 <div class="lightbox-methods" id="lightboxMethods"></div>
+                <!-- 手機版折扣說明 -->
+                <div class="lightbox-discount">
+                    <div class="lightbox-discount-title">📌 定價品滿額折扣</div>
+                    <table class="lightbox-discount-table">
+                        <tr><th>滿額門檻</th><th>折扣</th></tr>
+                        <tr><td>$3,000</td><td>9 折</td></tr>
+                        <tr><td>$10,000</td><td>85 折</td></tr>
+                        <tr><td>$40,000</td><td>7 折</td></tr>
+                    </table>
+                    <p class="lightbox-discount-note">⚠️ 定價品（標價 &lt; $1,000）適用此折扣，<strong>不適用身份折扣</strong>，僅依滿額門檻計算</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1283,14 +1364,18 @@
         }
 
         let currentFilter = 'all';
+        let currentProductIndex = 0;
+        let filteredProducts = [];
 
         function renderProducts(filter = 'all') {
             currentFilter = filter;
             const grid = document.getElementById('productsGrid');
 
-            let filtered = filter === 'all'
+            filteredProducts = filter === 'all'
                 ? products.map((p, i) => ({ ...p, originalIndex: i }))
                 : products.map((p, i) => ({ ...p, originalIndex: i })).filter(p => p.category === filter);
+
+            let filtered = filteredProducts;
 
             grid.innerHTML = filtered.map((product, index) => `
                 <div class="product-card"
@@ -1327,13 +1412,28 @@
 
         // Lightbox
         function openLightbox(productIndex) {
-            const product = products[productIndex];
+            // 找到在 filteredProducts 中的索引
+            currentProductIndex = filteredProducts.findIndex(p => p.originalIndex === productIndex);
+            if (currentProductIndex === -1) currentProductIndex = 0;
+
+            showProduct(currentProductIndex);
+
             const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showProduct(index) {
+            const product = filteredProducts[index];
+            if (!product) return;
 
             document.getElementById('lightboxImg').src = product.img;
             document.getElementById('lightboxName').textContent = product.name;
             document.getElementById('lightboxPrice').textContent = `NT$ ${formatPrice(product.price)}`;
             document.getElementById('lightboxFeature').textContent = product.feature;
+
+            // 更新計數器
+            document.getElementById('lightboxCounter').textContent = `${index + 1} / ${filteredProducts.length}`;
 
             // 顯示/隱藏定價品標籤
             const fixedInfo = document.getElementById('lightboxFixedInfo');
@@ -1352,8 +1452,23 @@
             `).join('');
             document.getElementById('lightboxMethods').innerHTML = methodsHtml;
 
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            // 更新按鈕狀態
+            document.querySelector('.lightbox-nav.prev').disabled = index === 0;
+            document.querySelector('.lightbox-nav.next').disabled = index === filteredProducts.length - 1;
+        }
+
+        function prevProduct() {
+            if (currentProductIndex > 0) {
+                currentProductIndex--;
+                showProduct(currentProductIndex);
+            }
+        }
+
+        function nextProduct() {
+            if (currentProductIndex < filteredProducts.length - 1) {
+                currentProductIndex++;
+                showProduct(currentProductIndex);
+            }
         }
 
         function closeLightbox() {
@@ -1367,6 +1482,10 @@
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'ArrowLeft') prevProduct();
+                if (e.key === 'ArrowRight') nextProduct();
+            }
         });
 
         // Initial render
@@ -1394,7 +1513,7 @@
     </script>
 
     <!-- 低價商品折扣說明 -->
-    <div class="discount-fab" onclick="toggleDiscountPanel()" title="定價品折扣說明"><span class="discount-fab-icon">💰</span></div>
+    <div class="discount-fab" title="定價品折扣說明"><span class="discount-fab-icon">💰</span></div>
     <div class="discount-panel" id="discountPanel">
         <div class="discount-panel-header"><span>📌</span><h3>定價品滿額折扣</h3><button class="discount-panel-close" onclick="closeDiscountPanel()">✕</button></div>
         <table class="discount-table"><tr><th>滿額門檻</th><th>折扣</th></tr><tr><td>$3,000</td><td>9 折</td></tr><tr><td>$10,000</td><td>85 折</td></tr><tr><td>$40,000</td><td>7 折</td></tr></table>
