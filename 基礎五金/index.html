@@ -1356,141 +1356,140 @@
     </div>
 
     <script>
-        // Product Data - 基礎五金（摩瑪品名 + 牌價 + 庫存）- 完整版
-        // stock 欄位供購物車系統使用，前端不顯示
+        // Product Data - 基礎五金（摩瑪品名 + 牌價）- 完整版
         const products = [
             // ========== 三維(緩衝)十字暗鉸鏈 ==========
-            { name: "免開_三維緩衝十字暗鉸鏈S3D_黑鎳", price: 6380, category: "十字暗鉸鏈", img: "免開_三維緩衝十字暗絞鏈S3D_01.JPG", stock: 0 },
-            { name: "半開_三維緩衝十字暗鉸鏈N3D_黑鎳", price: 6180, category: "十字暗鉸鏈", img: "半開_三維緩衝十字暗絞鏈N3D_01.JPG", stock: 0 },
-            { name: "全開_三維緩衝十字暗鉸鏈H3D_黑鎳", price: 5980, category: "十字暗鉸鏈", img: "全開_三維緩衝十字暗絞鏈H3D_01.JPG", stock: 0 },
-            { name: "40KG三維暗鉸鏈_槍灰", price: 680, category: "三維普通十字暗鉸鏈", img: "", stock: 24 },
-            { name: "40KG三維暗鉸鏈_銀色", price: 680, category: "三維普通十字暗鉸鏈", img: "", stock: 24 },
+            { name: "免開_三維緩衝十字暗鉸鏈S3D_黑鎳", price: 6380, category: "十字暗鉸鏈", img: "免開_三維緩衝十字暗絞鏈S3D_01.JPG"},
+            { name: "半開_三維緩衝十字暗鉸鏈N3D_黑鎳", price: 6180, category: "十字暗鉸鏈", img: "半開_三維緩衝十字暗絞鏈N3D_01.JPG"},
+            { name: "全開_三維緩衝十字暗鉸鏈H3D_黑鎳", price: 5980, category: "十字暗鉸鏈", img: "全開_三維緩衝十字暗絞鏈H3D_01.JPG"},
+            { name: "40KG三維暗鉸鏈_槍灰", price: 680, category: "三維普通十字暗鉸鏈", img: ""},
+            { name: "40KG三維暗鉸鏈_銀色", price: 680, category: "三維普通十字暗鉸鏈", img: ""},
 
             // ========== 特殊十字暗鉸鏈 ==========
-            { name: "免開_三維承重十字暗鉸鏈S3D_黑鎳", price: 3380, category: "三維十字暗鉸鏈", img: "免開_三維緩衝十字暗絞鏈S3D_02.JPG", stock: 0 },
-            { name: "半開_三維承重十字暗鉸鏈N3D_黑鎳", price: 3180, category: "三維十字暗鉸鏈", img: "半開_三維緩衝十字暗絞鏈N3D_02.JPG", stock: 0 },
-            { name: "全開_三維承重十字暗鉸鏈H3D_黑鎳", price: 2980, category: "三維十字暗鉸鏈", img: "全開_三維緩衝十字暗絞鏈H3D_02.JPG", stock: 0 },
-            { name: "普_三維十字暗鉸鏈30K_卡其", price: 780, category: "三維普通十字暗鉸鏈", img: "普＿三維十字暗鉸鏈.jpg", stock: 0 },
-            { name: "6KG小十字暗鉸鏈_槍灰", price: 200, category: "特殊十字暗鉸鏈", img: "", stock: 120 },
-            { name: "6KG小十字暗鉸鏈_銀色", price: 200, category: "特殊十字暗鉸鏈", img: "", stock: 0 },
+            { name: "免開_三維承重十字暗鉸鏈S3D_黑鎳", price: 3380, category: "三維十字暗鉸鏈", img: "免開_三維緩衝十字暗絞鏈S3D_02.JPG"},
+            { name: "半開_三維承重十字暗鉸鏈N3D_黑鎳", price: 3180, category: "三維十字暗鉸鏈", img: "半開_三維緩衝十字暗絞鏈N3D_02.JPG"},
+            { name: "全開_三維承重十字暗鉸鏈H3D_黑鎳", price: 2980, category: "三維十字暗鉸鏈", img: "全開_三維緩衝十字暗絞鏈H3D_02.JPG"},
+            { name: "普_三維十字暗鉸鏈30K_卡其", price: 780, category: "三維普通十字暗鉸鏈", img: "普＿三維十字暗鉸鏈.jpg"},
+            { name: "6KG小十字暗鉸鏈_槍灰", price: 200, category: "特殊十字暗鉸鏈", img: ""},
+            { name: "6KG小十字暗鉸鏈_銀色", price: 200, category: "特殊十字暗鉸鏈", img: ""},
 
             // ========== 二維十字暗鉸鏈 ==========
-            { name: "30KG二維暗鉸鏈_銀色", price: 580, category: "二維暗鉸鏈", img: "", stock: 24 },
+            { name: "30KG二維暗鉸鏈_銀色", price: 580, category: "二維暗鉸鏈", img: ""},
 
             // ========== 液壓合頁 ==========
-            { name: "五吋_自動回歸合頁5H_黑", price: 1680, category: "液壓合頁", img: "五寸液壓緩衝活頁.jpg", stock: 0 },
+            { name: "五吋_自動回歸合頁5H_黑", price: 1680, category: "液壓合頁", img: "五寸液壓緩衝活頁.jpg"},
 
             // ========== 一般合頁 ==========
-            { name: "五吋_承重合頁5B_黑", price: 1000, category: "承重合頁", img: "", stock: 0 },
-            { name: "四吋_極簡合頁(兩片裝)_白鐵", price: 200, category: "一般合頁", img: "四吋_極簡合頁(兩片裝)_啞黑01.jpg", stock: 0 },
+            { name: "五吋_承重合頁5B_黑", price: 1000, category: "承重合頁", img: ""},
+            { name: "四吋_極簡合頁(兩片裝)_白鐵", price: 200, category: "一般合頁", img: "四吋_極簡合頁(兩片裝)_啞黑01.jpg"},
 
             // ========== 門擋門吸 ==========
             // 緩衝地吸829
-            { name: "緩衝地吸829_啞黑", price: 498, category: "緩衝地吸", img: "液壓地吸01.jpg", stock: 0 },
+            { name: "緩衝地吸829_啞黑", price: 498, category: "緩衝地吸", img: "液壓地吸01.jpg"},
             // 基礎磁吸806
-            { name: "基礎磁吸806_白鐵", price: 228, category: "基礎磁吸", img: "基礎磁吸806/基礎磁吸806_白鐵.jpg", stock: 0 },
-            { name: "基礎磁吸806_黑鎳", price: 228, category: "基礎磁吸", img: "", stock: 0 },
-            { name: "基礎磁吸806_金絲", price: 248, category: "基礎磁吸", img: "基礎磁吸806/基礎磁吸806_金絲.jpg", stock: 0 },
-            { name: "基礎磁吸806_卡其", price: 248, category: "基礎磁吸", img: "", stock: 0 },
+            { name: "基礎磁吸806_白鐵", price: 228, category: "基礎磁吸", img: "基礎磁吸806/基礎磁吸806_白鐵.jpg"},
+            { name: "基礎磁吸806_黑鎳", price: 228, category: "基礎磁吸", img: ""},
+            { name: "基礎磁吸806_金絲", price: 248, category: "基礎磁吸", img: "基礎磁吸806/基礎磁吸806_金絲.jpg"},
+            { name: "基礎磁吸806_卡其", price: 248, category: "基礎磁吸", img: ""},
             // 防風地吸828
-            { name: "防風地吸828_白鐵", price: 458, category: "防風地吸", img: "防風地吸828/防風地吸828_白鐵.jpg", stock: 0 },
-            { name: "防風地吸828_金絲", price: 498, category: "防風地吸", img: "防風地吸828/防風地吸828_金絲.jpg", stock: 0 },
-            { name: "防風地吸828_黑鎳", price: 458, category: "防風地吸", img: "", stock: 0 },
+            { name: "防風地吸828_白鐵", price: 458, category: "防風地吸", img: "防風地吸828/防風地吸828_白鐵.jpg"},
+            { name: "防風地吸828_金絲", price: 498, category: "防風地吸", img: "防風地吸828/防風地吸828_金絲.jpg"},
+            { name: "防風地吸828_黑鎳", price: 458, category: "防風地吸", img: ""},
             // 明裝磁吸02
-            { name: "明裝磁吸02_白鐵", price: 358, category: "明裝磁吸", img: "", stock: 0 },
+            { name: "明裝磁吸02_白鐵", price: 358, category: "明裝磁吸", img: ""},
             // 磁鐵門擋104
-            { name: "磁鐵門擋104_卡其", price: 218, category: "磁鐵門擋", img: "", stock: 0 },
-            { name: "磁鐵門擋104_白鐵", price: 198, category: "磁鐵門擋", img: "磁鐵門擋104/磁鐵門擋104_白鐵.jpg", stock: 0 },
-            { name: "磁鐵門擋104_黑鎳", price: 198, category: "磁鐵門擋", img: "", stock: 0 },
+            { name: "磁鐵門擋104_卡其", price: 218, category: "磁鐵門擋", img: ""},
+            { name: "磁鐵門擋104_白鐵", price: 198, category: "磁鐵門擋", img: "磁鐵門擋104/磁鐵門擋104_白鐵.jpg"},
+            { name: "磁鐵門擋104_黑鎳", price: 198, category: "磁鐵門擋", img: ""},
             // 橡膠門擋008
-            { name: "橡膠門擋008_白鐵", price: 178, category: "橡膠門擋", img: "橡膠門擋008/橡膠門擋008_白鐵.jpg", stock: 0 },
+            { name: "橡膠門擋008_白鐵", price: 178, category: "橡膠門擋", img: "橡膠門擋008/橡膠門擋008_白鐵.jpg"},
 
             // ========== 門用配件 ==========
-            { name: "門下靜音條", price: 868, category: "門下靜音條", img: "JYT-SY門下靜音條/門下靜音條01.jpg", stock: 0 },
+            { name: "門下靜音條", price: 868, category: "門下靜音條", img: "JYT-SY門下靜音條/門下靜音條01.jpg"},
 
             // ========== 西德鉸鏈(常規) ==========
             // BG系列 (百妥適)
-            { name: "櫃用_美式內開門鉸鏈BG112", price: 75, category: "西德特殊", img: "櫃用_美式內開門鉸鏈BG11201.JPG", stock: 300, hasVideo: true },
-            { name: "櫃用_極窄淺櫃超短腿BG059", price: 65, category: "西德短腿", img: "櫃用_極窄淺櫃超短腿BG05901.JPG", stock: 200 },
-            { name: "櫃用_短腿鉸鏈BG069_蓋六分", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG", stock: 50 },
-            { name: "櫃用_短腿鉸鏈BG069_蓋三分", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG", stock: 100 },
-            { name: "櫃用_短腿鉸鏈BG069_入柱", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG", stock: 50 },
+            { name: "櫃用_美式內開門鉸鏈BG112", price: 75, category: "西德特殊", img: "櫃用_美式內開門鉸鏈BG11201.JPG", hasVideo: true },
+            { name: "櫃用_極窄淺櫃超短腿BG059", price: 65, category: "西德短腿", img: "櫃用_極窄淺櫃超短腿BG05901.JPG"},
+            { name: "櫃用_短腿鉸鏈BG069_蓋六分", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG"},
+            { name: "櫃用_短腿鉸鏈BG069_蓋三分", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG"},
+            { name: "櫃用_短腿鉸鏈BG069_入柱", price: 55, category: "西德短腿", img: "櫃用_短腿鉸鏈BG069_01.JPG"},
             // E系列 (宇時和) - 兩孔底座
-            { name: "快拆兩孔/蓋六/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: "", stock: 0 },
-            { name: "快拆兩孔/蓋三/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: "", stock: 0 },
-            { name: "快拆兩孔/入柱/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: "", stock: 0 },
-            // K1系列 (宇時和) - 四孔底座 - 有庫存
-            { name: "快拆四孔/蓋六/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: "", stock: 400 },
-            { name: "快拆四孔/蓋三/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: "", stock: 200 },
-            { name: "快拆四孔/入柱/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: "", stock: 200 },
+            { name: "快拆兩孔/蓋六/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: ""},
+            { name: "快拆兩孔/蓋三/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: ""},
+            { name: "快拆兩孔/入柱/快調/可固定角度鉸鏈", price: 45, category: "西德常規兩孔", img: ""},
+            // K1系列 (宇時和) - 四孔底座
+            { name: "快拆四孔/蓋六/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: ""},
+            { name: "快拆四孔/蓋三/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: ""},
+            { name: "快拆四孔/入柱/快調/可固定角度鉸鏈", price: 43, category: "西德常規四孔", img: ""},
             // K2系列 (宇時和) - 四孔底座
-            { name: "固定四孔/蓋六/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: "", stock: 0 },
-            { name: "固定四孔/蓋三/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: "", stock: 0 },
-            { name: "固定四孔/入柱/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: "", stock: 0 },
-            { name: "快拆四孔/蓋六/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: "", stock: 0 },
-            { name: "快拆四孔/蓋三/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: "", stock: 0 },
-            { name: "快拆四孔/入柱/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: "", stock: 0 },
+            { name: "固定四孔/蓋六/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: ""},
+            { name: "固定四孔/蓋三/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: ""},
+            { name: "固定四孔/入柱/自由角度鉸鏈", price: 35, category: "西德常規四孔", img: ""},
+            { name: "快拆四孔/蓋六/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: ""},
+            { name: "快拆四孔/蓋三/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: ""},
+            { name: "快拆四孔/入柱/自由角度鉸鏈", price: 40, category: "西德常規四孔", img: ""},
             // 櫃用配件 (宇時和)
-            { name: "櫃用_拍拍手開關", price: 55, category: "拍拍手", img: "櫃用_拍拍手開關01.JPG", stock: 0 },
-            { name: "櫃用_甲蟲碰珠", price: 320, category: "甲蟲", img: "櫃用_甲蟲碰珠.JPG", stock: 0 },
-            { name: "櫃用_上掀油壓桿", price: 180, category: "油壓支撐桿", img: "", stock: 0 },
-            { name: "櫃用_下翻油壓桿", price: 220, category: "油壓支撐桿", img: "", stock: 0 },
-            { name: "櫃用_上掀油壓桿_百", price: 220, category: "油壓支撐桿", img: "櫃用_上掀油壓桿_百.JPG", stock: 0 },
+            { name: "櫃用_拍拍手開關", price: 55, category: "拍拍手", img: "櫃用_拍拍手開關01.JPG"},
+            { name: "櫃用_甲蟲碰珠", price: 320, category: "甲蟲", img: "櫃用_甲蟲碰珠.JPG"},
+            { name: "櫃用_上掀油壓桿", price: 180, category: "油壓支撐桿", img: ""},
+            { name: "櫃用_下翻油壓桿", price: 220, category: "油壓支撐桿", img: ""},
+            { name: "櫃用_上掀油壓桿_百", price: 220, category: "油壓支撐桿", img: "櫃用_上掀油壓桿_百.JPG"},
 
             // ========== 西德鉸鏈(特殊) ==========
-            { name: "快拆四孔/吋15/135特殊鉸鏈", price: 140, category: "西德特殊", img: "", stock: 118 },
-            { name: "快拆四孔/吋15/90特殊鉸鏈", price: 140, category: "西德特殊", img: "", stock: 200 },
-            { name: "快拆四孔/吋15/45特殊鉸鏈", price: 140, category: "西德特殊", img: "", stock: 0 },
-            { name: "快拆四孔/吋15/30特殊鉸鏈", price: 140, category: "西德特殊", img: "", stock: 0 },
+            { name: "快拆四孔/吋15/135特殊鉸鏈", price: 140, category: "西德特殊", img: ""},
+            { name: "快拆四孔/吋15/90特殊鉸鏈", price: 140, category: "西德特殊", img: ""},
+            { name: "快拆四孔/吋15/45特殊鉸鏈", price: 140, category: "西德特殊", img: ""},
+            { name: "快拆四孔/吋15/30特殊鉸鏈", price: 140, category: "西德特殊", img: ""},
 
             // ========== 西德鉸鏈(大角度) ==========
-            { name: "快拆四孔/155厚門/緩衝鉸鏈_蓋六", price: 180, category: "西德大角度", img: "", stock: 212 },
-            { name: "快拆四孔/155厚門/緩衝鉸鏈_蓋三", price: 180, category: "西德大角度", img: "", stock: 0 },
-            { name: "快拆四孔/155厚門/緩衝鉸鏈_入柱", price: 180, category: "西德大角度", img: "", stock: 200 },
-            { name: "快拆四孔/155厚門/無阻力鉸鏈_蓋六", price: 180, category: "西德大角度", img: "", stock: 0 },
-            { name: "快拆四孔/155厚門/無阻力鉸鏈_蓋三", price: 180, category: "西德大角度", img: "", stock: 0 },
-            { name: "快拆四孔/155厚門/無阻力鉸鏈_入柱", price: 180, category: "西德大角度", img: "", stock: 0 },
-            { name: "快拆四孔/180厚門/緩衝鉸鏈_蓋六", price: 220, category: "西德大角度", img: "", stock: 0 },
-            { name: "快拆四孔/125斜角門/緩衝鉸鏈_蓋六", price: 220, category: "西德特殊", img: "", stock: 0 },
-            { name: "快拆四孔/125斜角門/緩衝鉸鏈_蓋三", price: 220, category: "西德特殊", img: "", stock: 0 },
-            { name: "快拆四孔/125斜角門/緩衝鉸鏈_入柱", price: 220, category: "西德特殊", img: "", stock: 0 },
+            { name: "快拆四孔/155厚門/緩衝鉸鏈_蓋六", price: 180, category: "西德大角度", img: ""},
+            { name: "快拆四孔/155厚門/緩衝鉸鏈_蓋三", price: 180, category: "西德大角度", img: ""},
+            { name: "快拆四孔/155厚門/緩衝鉸鏈_入柱", price: 180, category: "西德大角度", img: ""},
+            { name: "快拆四孔/155厚門/無阻力鉸鏈_蓋六", price: 180, category: "西德大角度", img: ""},
+            { name: "快拆四孔/155厚門/無阻力鉸鏈_蓋三", price: 180, category: "西德大角度", img: ""},
+            { name: "快拆四孔/155厚門/無阻力鉸鏈_入柱", price: 180, category: "西德大角度", img: ""},
+            { name: "快拆四孔/180厚門/緩衝鉸鏈_蓋六", price: 220, category: "西德大角度", img: ""},
+            { name: "快拆四孔/125斜角門/緩衝鉸鏈_蓋六", price: 220, category: "西德特殊", img: ""},
+            { name: "快拆四孔/125斜角門/緩衝鉸鏈_蓋三", price: 220, category: "西德特殊", img: ""},
+            { name: "快拆四孔/125斜角門/緩衝鉸鏈_入柱", price: 220, category: "西德特殊", img: ""},
 
             // ========== 三節緩衝滑軌 ==========
-            { name: "三節式_緩衝滑軌4510(一對)_25cm", price: 240, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 15 },
-            { name: "三節式_緩衝滑軌4510(一對)_30cm", price: 260, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 30 },
-            { name: "三節式_緩衝滑軌4510(一對)_35cm", price: 280, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 30 },
-            { name: "三節式_緩衝滑軌4510(一對)_40cm", price: 300, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 30 },
-            { name: "三節式_緩衝滑軌4510(一對)_45cm", price: 320, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 30 },
-            { name: "三節式_緩衝滑軌4510(一對)_50cm", price: 340, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG", stock: 15 },
+            { name: "三節式_緩衝滑軌4510(一對)_25cm", price: 240, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG"},
+            { name: "三節式_緩衝滑軌4510(一對)_30cm", price: 260, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG"},
+            { name: "三節式_緩衝滑軌4510(一對)_35cm", price: 280, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG"},
+            { name: "三節式_緩衝滑軌4510(一對)_40cm", price: 300, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG"},
+            { name: "三節式_緩衝滑軌4510(一對)_45cm", price: 320, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG"},
+            { name: "三節式_緩衝滑軌4510(一對)_50cm", price: 340, category: "三節緩衝滑軌", img: "三節式_緩衝滑軌4510(一對)01.JPG"},
 
             // ========== 三節彈壓滑軌 ==========
-            { name: "三節式_彈壓滑軌4510(一對)_25cm", price: 240, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
-            { name: "三節式_彈壓滑軌4510(一對)_30cm", price: 260, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
-            { name: "三節式_彈壓滑軌4510(一對)_35cm", price: 280, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
-            { name: "三節式_彈壓滑軌4510(一對)_40cm", price: 300, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
-            { name: "三節式_彈壓滑軌4510(一對)_45cm", price: 320, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
-            { name: "三節式_彈壓滑軌4510(一對)_50cm", price: 340, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG", stock: 0 },
+            { name: "三節式_彈壓滑軌4510(一對)_25cm", price: 240, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG"},
+            { name: "三節式_彈壓滑軌4510(一對)_30cm", price: 260, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG"},
+            { name: "三節式_彈壓滑軌4510(一對)_35cm", price: 280, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG"},
+            { name: "三節式_彈壓滑軌4510(一對)_40cm", price: 300, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG"},
+            { name: "三節式_彈壓滑軌4510(一對)_45cm", price: 320, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG"},
+            { name: "三節式_彈壓滑軌4510(一對)_50cm", price: 340, category: "三節彈壓滑軌", img: "三節式_彈壓滑軌4510(一對)01.JPG"},
 
             // ========== 座式緩衝滑軌 ==========
-            { name: "座式_緩衝滑軌3118(一對)_25cm", price: 400, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 10 },
-            { name: "座式_緩衝滑軌3118(一對)_30cm", price: 440, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 20 },
-            { name: "座式_緩衝滑軌3118(一對)_35cm", price: 480, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 20 },
-            { name: "座式_緩衝滑軌3118(一對)_40cm", price: 520, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 20 },
-            { name: "座式_緩衝滑軌3118(一對)_45cm", price: 560, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 20 },
-            { name: "座式_緩衝滑軌3118(一對)_50cm", price: 600, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 10 },
-            { name: "座式_緩衝滑軌3118(一對)_55cm", price: 640, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG", stock: 0 },
+            { name: "座式_緩衝滑軌3118(一對)_25cm", price: 400, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG"},
+            { name: "座式_緩衝滑軌3118(一對)_30cm", price: 440, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG"},
+            { name: "座式_緩衝滑軌3118(一對)_35cm", price: 480, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG"},
+            { name: "座式_緩衝滑軌3118(一對)_40cm", price: 520, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG"},
+            { name: "座式_緩衝滑軌3118(一對)_45cm", price: 560, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG"},
+            { name: "座式_緩衝滑軌3118(一對)_50cm", price: 600, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG"},
+            { name: "座式_緩衝滑軌3118(一對)_55cm", price: 640, category: "三節座式緩衝滑軌", img: "座式_緩衝滑軌3118(一對).JPG"},
 
             // ========== 座式彈壓滑軌 ==========
-            { name: "座式_彈壓滑軌3118(一對)_25cm", price: 400, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
-            { name: "座式_彈壓滑軌3118(一對)_30cm", price: 440, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
-            { name: "座式_彈壓滑軌3118(一對)_35cm", price: 480, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
-            { name: "座式_彈壓滑軌3118(一對)_40cm", price: 520, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
-            { name: "座式_彈壓滑軌3118(一對)_45cm", price: 560, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
-            { name: "座式_彈壓滑軌3118(一對)_50cm", price: 600, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
-            { name: "座式_彈壓滑軌3118(一對)_55cm", price: 640, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG", stock: 0 },
+            { name: "座式_彈壓滑軌3118(一對)_25cm", price: 400, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG"},
+            { name: "座式_彈壓滑軌3118(一對)_30cm", price: 440, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG"},
+            { name: "座式_彈壓滑軌3118(一對)_35cm", price: 480, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG"},
+            { name: "座式_彈壓滑軌3118(一對)_40cm", price: 520, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG"},
+            { name: "座式_彈壓滑軌3118(一對)_45cm", price: 560, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG"},
+            { name: "座式_彈壓滑軌3118(一對)_50cm", price: 600, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG"},
+            { name: "座式_彈壓滑軌3118(一對)_55cm", price: 640, category: "三節座式彈壓滑軌", img: "座式_彈壓滑軌3118(一對).JPG"},
 
             // ========== 旋轉門五金 ==========
-            { name: "中偏軸兩用天地五金", price: 6300, category: "中偏軸門", img: "", stock: 10 },
+            { name: "中偏軸兩用天地五金", price: 6300, category: "中偏軸門", img: ""},
         ];
 
         const basePath = "images/";
