@@ -1127,7 +1127,7 @@
         /* 手機版：隱藏浮動按鈕，在 Lightbox 顯示折扣說明 */
         @media (max-width: 768px) {
             .discount-fab, .discount-panel { display: none !important; }
-            .lightbox-discount { display: block; }
+            .lightbox-discount.show { display: block; }
         }
     </style>
 </head>
@@ -1440,10 +1440,10 @@
             const discountInfo = document.getElementById('lightboxDiscount');
             if (product.price < 1000) {
                 fixedInfo.classList.add('show');
-                discountInfo.style.display = '';
+                discountInfo.classList.add('show');
             } else {
                 fixedInfo.classList.remove('show');
-                discountInfo.style.display = 'none';
+                discountInfo.classList.remove('show');
             }
 
             // 渲染解鎖方式
