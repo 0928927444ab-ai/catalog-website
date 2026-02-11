@@ -1340,8 +1340,8 @@
                 </div>
                 <p class="lightbox-name" id="lightboxName"></p>
                 <p class="lightbox-price" id="lightboxPrice"></p>
-                <!-- 手機版折扣說明 -->
-                <div class="lightbox-discount">
+                <!-- 手機版折扣說明（僅定價品顯示） -->
+                <div class="lightbox-discount" id="lightboxDiscount"
                     <div class="lightbox-discount-title">📌 定價品滿額折扣</div>
                     <table class="lightbox-discount-table">
                         <tr><th>滿額門檻</th><th>折扣</th></tr>
@@ -1642,12 +1642,15 @@
             document.getElementById('lightboxName').textContent = name;
             document.getElementById('lightboxPrice').textContent = `NT$ ${formatPrice(price)}`;
 
-            // 顯示/隱藏定價品標籤
+            // 顯示/隱藏定價品標籤和滿額折扣（僅 < $1000 時顯示）
             const fixedInfo = document.getElementById('lightboxFixedInfo');
+            const discountInfo = document.getElementById('lightboxDiscount');
             if (price < 1000) {
                 fixedInfo.classList.add('show');
+                discountInfo.style.display = '';  // 讓 CSS media query 控制
             } else {
                 fixedInfo.classList.remove('show');
+                discountInfo.style.display = 'none';  // 強制隱藏
             }
 
             lightbox.classList.add('active');

@@ -1127,7 +1127,7 @@
             <button class="filter-btn active" data-filter="all">全部商品</button>
             <button class="filter-btn" data-filter="一體鎖">一體鎖系列</button>
             <button class="filter-btn" data-filter="分體鎖">分體鎖系列</button>
-            <button class="filter-btn" data-filter="隱形鎖">隱藏門鎖</button>
+            <button class="filter-btn" data-filter="隱藏鎖">隱藏門鎖</button>
             <button class="filter-btn" data-filter="滑門鎖">滑門鎖系列</button>
             <button class="filter-btn" data-filter="配件">面板配件</button>
         </div>
@@ -1212,8 +1212,8 @@
                 </div>
                 <p class="lightbox-name" id="lightboxName"></p>
                 <p class="lightbox-price" id="lightboxPrice"></p>
-                <!-- 手機版折扣說明 -->
-                <div class="lightbox-discount">
+                <!-- 手機版折扣說明（僅定價品顯示） -->
+                <div class="lightbox-discount" id="lightboxDiscount"
                     <div class="lightbox-discount-title">📌 定價品滿額折扣</div>
                     <table class="lightbox-discount-table">
                         <tr><th>滿額門檻</th><th>折扣</th></tr>
@@ -1259,13 +1259,13 @@
             // A6 設計木系列：1=銀絲+橄欖木, 2=銀絲+橄欖木, 3=黑鎳+胡桃木
             { name: "分_設計木A6_銀絲+橄欖木", price: 3580, category: "分體鎖", model: "A6-529", img: "1" },
             { name: "分_設計木A6_黑鎳+胡桃木", price: 3580, category: "分體鎖", model: "A6-529", img: "3" },
-            { name: "隱_球體AY61_霧銀", price: 1980, category: "隱形鎖", model: "AY-61", img: "27" },
-            { name: "隱_球體AY61_啞黑", price: 1980, category: "隱形鎖", model: "AY-61", img: "28" },
-            { name: "隱_平頭AY119_銀絲", price: 1380, category: "隱形鎖", model: "AY-119", img: "25" },
-            { name: "隱_平頭AY119_黑鎳", price: 1380, category: "隱形鎖", model: "AY-119", img: "26" },
-            { name: "隱_把手AY58_啞黑", price: 1980, category: "隱形鎖", model: "AY-T58", img: "29" },
-            { name: "隱_把手AY58_黑鎳", price: 1980, category: "隱形鎖", model: "AY-T58", img: "30" },
-            { name: "隱_彈頭AY40_啞黑", price: 1380, category: "隱形鎖", model: "AY-40", img: "AY-40-1" },
+            { name: "隱_球體AY61_霧銀", price: 1980, category: "隱藏鎖", model: "AY-61", img: "27" },
+            { name: "隱_球體AY61_啞黑", price: 1980, category: "隱藏鎖", model: "AY-61", img: "28" },
+            { name: "隱_平頭AY119_銀絲", price: 1380, category: "隱藏鎖", model: "AY-119", img: "25" },
+            { name: "隱_平頭AY119_黑鎳", price: 1380, category: "隱藏鎖", model: "AY-119", img: "26" },
+            { name: "隱_把手AY58_啞黑", price: 1980, category: "隱藏鎖", model: "AY-T58", img: "29" },
+            { name: "隱_把手AY58_黑鎳", price: 1980, category: "隱藏鎖", model: "AY-T58", img: "30" },
+            { name: "隱_彈頭AY40_啞黑", price: 1380, category: "隱藏鎖", model: "AY-40", img: "AY-40-1" },
             { name: "滑_小WY11_金絲", price: 2380, category: "滑門鎖", model: "WY11", img: "31" },
             { name: "滑_小WY11_黑鎳", price: 2180, category: "滑門鎖", model: "WY11", img: "32" },
             { name: "滑_小WY11_啞黑", price: 2180, category: "滑門鎖", model: "WY11", img: "33" },
@@ -1289,7 +1289,7 @@
             const labels = {
                 "一體鎖": "一體鎖 INTEGRATED",
                 "分體鎖": "分體鎖 SPLIT LOCK",
-                "隱形鎖": "隱形鎖 HIDDEN",
+                "隱藏鎖": "隱藏鎖 HIDDEN",
                 "滑門鎖": "滑門鎖 SLIDING",
                 "配件": "配件 ACCESSORY"
             };
@@ -1344,12 +1344,15 @@
             document.getElementById('lightboxName').textContent = name;
             document.getElementById('lightboxPrice').textContent = `NT$ ${formatPrice(price)}`;
 
-            // 顯示/隱藏定價品標籤
+            // 顯示/隱藏定價品標籤和滿額折扣（僅 < $1000 時顯示）
             const fixedInfo = document.getElementById('lightboxFixedInfo');
+            const discountInfo = document.getElementById('lightboxDiscount');
             if (price < 1000) {
                 fixedInfo.classList.add('show');
+                discountInfo.style.display = '';  // 讓 CSS media query 控制
             } else {
                 fixedInfo.classList.remove('show');
+                discountInfo.style.display = 'none';  // 強制隱藏
             }
 
             lightbox.classList.add('active');

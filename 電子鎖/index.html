@@ -1267,8 +1267,8 @@
                 <p class="lightbox-price" id="lightboxPrice"></p>
                 <p class="lightbox-feature" id="lightboxFeature"></p>
                 <div class="lightbox-methods" id="lightboxMethods"></div>
-                <!-- 手機版折扣說明 -->
-                <div class="lightbox-discount">
+                <!-- 手機版折扣說明（僅定價品顯示） -->
+                <div class="lightbox-discount" id="lightboxDiscount"
                     <div class="lightbox-discount-title">📌 定價品滿額折扣</div>
                     <table class="lightbox-discount-table">
                         <tr><th>滿額門檻</th><th>折扣</th></tr>
@@ -1435,12 +1435,15 @@
             // 更新計數器
             document.getElementById('lightboxCounter').textContent = `${index + 1} / ${filteredProducts.length}`;
 
-            // 顯示/隱藏定價品標籤
+            // 顯示/隱藏定價品標籤和滿額折扣（僅 < $1000 時顯示）
             const fixedInfo = document.getElementById('lightboxFixedInfo');
+            const discountInfo = document.getElementById('lightboxDiscount');
             if (product.price < 1000) {
                 fixedInfo.classList.add('show');
+                discountInfo.style.display = '';
             } else {
                 fixedInfo.classList.remove('show');
+                discountInfo.style.display = 'none';
             }
 
             // 渲染解鎖方式
