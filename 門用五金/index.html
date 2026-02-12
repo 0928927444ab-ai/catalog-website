@@ -1033,7 +1033,7 @@
             line-height: 1.5;
         }
         .discount-note-text strong { color: #e53e3e; }
-        /* Lightbox 內的折扣說明（手機版顯示） */
+        /* Lightbox 內的折扣說明（定價品顯示） */
         .lightbox-discount {
             display: none;
             margin-top: 16px;
@@ -1041,6 +1041,9 @@
             background: rgba(201, 169, 98, 0.08);
             border: 1px solid var(--gold);
             border-radius: 12px;
+        }
+        .lightbox-discount.show {
+            display: block;
         }
         .lightbox-discount-title {
             color: var(--gold);
