@@ -1352,9 +1352,11 @@
             // 顯示/隱藏定價品標籤和滿額折扣（僅 < $1000 時顯示）
             const fixedInfo = document.getElementById('lightboxFixedInfo');
             const discountInfo = document.getElementById('lightboxDiscount');
+            console.log('價格:', price, '< 1000?', price < 1000, 'discountInfo:', discountInfo);
             if (price < 1000) {
                 fixedInfo.classList.add('show');
                 discountInfo.classList.add('show');
+                console.log('已加入 show class:', discountInfo.classList);
             } else {
                 fixedInfo.classList.remove('show');
                 discountInfo.classList.remove('show');
