@@ -1158,6 +1158,52 @@
         }
         .lightbox-discount-note strong { color: #e53e3e; }
 
+        /* Lightbox 左右切換按鈕 */
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+            transition: all 0.3s;
+            border-radius: 50%;
+        }
+        .lightbox-nav:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+        .lightbox-nav.prev { left: 20px; }
+        .lightbox-nav.next { right: 20px; }
+        .lightbox-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .lightbox-nav:disabled:hover {
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--gold);
+        }
+        .lightbox-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--gold);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 1002;
+        }
+
         /* 手機版：隱藏浮動按鈕，在 Lightbox 顯示折扣說明 */
         @media (max-width: 768px) {
             .discount-fab, .discount-panel { display: none !important; }
@@ -1335,6 +1381,9 @@
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
+        <button class="lightbox-nav prev" onclick="prevProduct()">❮</button>
+        <button class="lightbox-nav next" onclick="nextProduct()">❯</button>
+        <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
         <div class="lightbox-content">
             <button class="lightbox-close" onclick="closeLightbox()">×</button>
             <img id="lightboxImg" src="" alt="">
@@ -1499,6 +1548,8 @@
 
         const basePath = "images/";
         let currentFilter = 'all';
+        let filteredProducts = [];
+        let currentProductIndex = 0;
 
         function getImagePath(product) {
             if (!product.img) return '';
@@ -1512,37 +1563,39 @@
         function renderProducts(filter = 'all') {
             currentFilter = filter;
             const grid = document.getElementById('productsGrid');
-            let filtered;
+
+            // 根據篩選條件過濾產品，並記錄原始索引
             if (filter === 'all') {
-                filtered = products;
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}));
             } else if (filter === '全部十字暗鉸鏈') {
-                // 顯示所有十字暗鉸鏈產品
-                filtered = products.filter(p => p.category.includes('暗鉸鏈') || p.category.includes('暗鉸鏈'));
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}))
+                    .filter(p => p.category.includes('暗鉸鏈'));
             } else if (filter === '滑軌') {
-                // 顯示所有滑軌類產品
-                filtered = products.filter(p => p.category.includes('滑軌'));
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}))
+                    .filter(p => p.category.includes('滑軌'));
             } else if (filter === '西德鉸鏈') {
-                // 顯示所有西德鉸鏈產品
-                filtered = products.filter(p => p.category.startsWith('西德'));
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}))
+                    .filter(p => p.category.startsWith('西德'));
             } else if (filter === '合頁') {
-                // 顯示所有合頁產品
-                filtered = products.filter(p => p.category.includes('合頁'));
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}))
+                    .filter(p => p.category.includes('合頁'));
             } else if (filter === '門擋門吸') {
-                // 顯示所有門擋門吸產品
-                filtered = products.filter(p => p.category.includes('地吸') || p.category.includes('磁吸') || p.category.includes('門擋'));
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}))
+                    .filter(p => p.category.includes('地吸') || p.category.includes('磁吸') || p.category.includes('門擋'));
             } else if (filter === '門用配件') {
-                // 顯示所有門用配件產品
-                filtered = products.filter(p => p.category === '門下靜音條' || p.category === '拍拍手' || p.category === '甲蟲' || p.category === '油壓支撐桿');
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}))
+                    .filter(p => p.category === '門下靜音條' || p.category === '拍拍手' || p.category === '甲蟲' || p.category === '油壓支撐桿');
             } else if (filter === '旋轉門五金') {
-                // 顯示所有旋轉門五金產品（中軸門、偏軸門、中偏軸門）
-                filtered = products.filter(p => p.category === '中軸門' || p.category === '偏軸門' || p.category === '中偏軸門');
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}))
+                    .filter(p => p.category === '中軸門' || p.category === '偏軸門' || p.category === '中偏軸門');
             } else {
-                filtered = products.filter(p => p.category === filter);
+                filteredProducts = products.map((p, i) => ({...p, originalIndex: i}))
+                    .filter(p => p.category === filter);
             }
 
-            grid.innerHTML = filtered.map((product, index) => `
+            grid.innerHTML = filteredProducts.map((product, index) => `
                 <div class="product-card"
-                     onclick="openLightbox('${getImagePath(product)}', '${product.name}', ${product.price})"
+                     onclick="openLightbox(${product.originalIndex})"
                      style="animation-delay: ${0.1 + (index % 8) * 0.05}s">
                     <div class="product-image">
                         ${product.price < 1000 ? '<span class="fixed-price-tag">定價品</span>' : ''}
@@ -1640,26 +1693,56 @@
         });
 
         // Lightbox
-        function openLightbox(src, name, price) {
-            if (!src) return;
-            const lightbox = document.getElementById('lightbox');
-            document.getElementById('lightboxImg').src = src;
-            document.getElementById('lightboxName').textContent = name;
-            document.getElementById('lightboxPrice').textContent = `NT$ ${formatPrice(price)}`;
+        function openLightbox(productIndex) {
+            // 找到該產品在 filteredProducts 中的位置
+            currentProductIndex = filteredProducts.findIndex(p => p.originalIndex === productIndex);
+            if (currentProductIndex === -1) currentProductIndex = 0;
+
+            showProduct(currentProductIndex);
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showProduct(index) {
+            const product = filteredProducts[index];
+            if (!product) return;
+
+            const src = getImagePath(product);
+            document.getElementById('lightboxImg').src = src || '';
+            document.getElementById('lightboxName').textContent = product.name;
+            document.getElementById('lightboxPrice').textContent = `NT$ ${formatPrice(product.price)}`;
+
+            // 更新計數器
+            document.getElementById('lightboxCounter').textContent = `${index + 1} / ${filteredProducts.length}`;
+
+            // 更新導航按鈕狀態
+            document.querySelector('.lightbox-nav.prev').disabled = (index === 0);
+            document.querySelector('.lightbox-nav.next').disabled = (index === filteredProducts.length - 1);
 
             // 顯示/隱藏定價品標籤和滿額折扣（僅 < $1000 時顯示）
             const fixedInfo = document.getElementById('lightboxFixedInfo');
             const discountInfo = document.getElementById('lightboxDiscount');
-            if (price < 1000) {
+            if (product.price < 1000) {
                 fixedInfo.classList.add('show');
                 discountInfo.classList.add('show');
             } else {
                 fixedInfo.classList.remove('show');
                 discountInfo.classList.remove('show');
             }
+        }
 
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        function prevProduct() {
+            if (currentProductIndex > 0) {
+                currentProductIndex--;
+                showProduct(currentProductIndex);
+            }
+        }
+
+        function nextProduct() {
+            if (currentProductIndex < filteredProducts.length - 1) {
+                currentProductIndex++;
+                showProduct(currentProductIndex);
+            }
         }
 
         function closeLightbox() {
@@ -1672,8 +1755,49 @@
         });
 
         document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+
             if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevProduct();
+            if (e.key === 'ArrowRight') nextProduct();
         });
+
+        // 觸控滑動功能
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        const swipeThreshold = 50; // 滑動觸發閾值（像素）
+
+        const lightboxEl = document.getElementById('lightbox');
+
+        lightboxEl.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        lightboxEl.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+
+            // 確保是水平滑動（水平距離大於垂直距離）
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+                if (deltaX < 0) {
+                    // 向左滑 = 下一個
+                    nextProduct();
+                } else {
+                    // 向右滑 = 上一個
+                    prevProduct();
+                }
+            }
+        }
 
         // Initial render
         renderProducts();
