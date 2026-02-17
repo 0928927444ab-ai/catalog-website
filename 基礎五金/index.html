@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>摩瑪建材產品資訊網站 | 基礎五金</title>
+    <!-- v2.1 - Lightbox 左右切換 + 觸控滑動 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1202,6 +1203,13 @@
             border-radius: 20px;
             font-size: 14px;
             z-index: 1002;
+        }
+
+        /* 手機版 Lightbox 導航按鈕 */
+        @media (max-width: 768px) {
+            .lightbox-nav { width: 40px; height: 40px; font-size: 1.2rem; }
+            .lightbox-nav.prev { left: 10px; }
+            .lightbox-nav.next { right: 10px; }
         }
 
         /* 手機版：隱藏浮動按鈕，在 Lightbox 顯示折扣說明 */
