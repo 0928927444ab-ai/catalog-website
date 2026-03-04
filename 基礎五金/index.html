@@ -104,6 +104,13 @@
             border-radius: 4px;
         }
 
+        .logo-arrow {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin: 0 0.5rem;
+            opacity: 0.7;
+        }
+
         .logo-text {
             display: flex;
             flex-direction: column;
@@ -1242,10 +1249,8 @@
         <div class="header-content">
             <a href="../index.html" class="logo">
                 <img src="../themore-logo.jpg" alt="樂莫集團" class="logo-img">
-                <div class="logo-text">
-                    <span class="logo-group">樂莫集團 The More</span>
-                    <span class="logo-brand">摩瑪建材 more materials<span>+</span></span>
-                </div>
+                
+                <img src="../moma-logo.jpg" alt="摩瑪建材" class="logo-img">
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
@@ -1397,8 +1402,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-brand">
-            <p class="footer-group">樂莫集團 The More</p>
-            <p class="footer-name">摩瑪建材 more materials+</p>
+            <p class="footer-name">摩瑪建材 MORE MATERIALS+</p>
         </div>
         <p class="footer-tagline">義大利設計美學 · 德國工藝品質 · 用新式建材改變台灣裝修生態</p>
         <p class="footer-copyright">© 2026 摩瑪建材產品資訊網站. All Rights Reserved.</p>
@@ -1612,7 +1616,7 @@
             { name: "志_中偏軸兩用天地五金", price: 6300, category: "中偏軸門", img: "", desc: "• 中偏軸及偏軸兩用<br>• 適用厚門<br>• 承重100KG<br>• 附安裝螺絲" },
         ];
 
-        const basePath = "images/";
+        const basePath = "https://moma-images.pages.dev/基礎五金/";
         let currentFilter = 'all';
         let filteredProducts = [];
         let currentProductIndex = 0;

@@ -104,6 +104,13 @@
             border-radius: 4px;
         }
 
+        .logo-arrow {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin: 0 0.5rem;
+            opacity: 0.7;
+        }
+
         .logo-text {
             display: flex;
             flex-direction: column;
@@ -1143,10 +1150,8 @@
         <div class="header-content">
             <a href="../index.html" class="logo">
                 <img src="../themore-logo.jpg" alt="樂莫集團" class="logo-img">
-                <div class="logo-text">
-                    <span class="logo-group">樂莫集團 The More</span>
-                    <span class="logo-brand">摩瑪建材 more materials<span>+</span></span>
-                </div>
+                
+                <img src="../moma-logo.jpg" alt="摩瑪建材" class="logo-img">
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
@@ -1264,8 +1269,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-brand">
-            <p class="footer-group">樂莫集團 The More</p>
-            <p class="footer-name">摩瑪建材 more materials+</p>
+            <p class="footer-name">摩瑪建材 MORE MATERIALS+</p>
         </div>
         <p class="footer-tagline">義大利設計美學 · 德國工藝品質 · 用新式建材改變台灣裝修生態</p>
         <p class="footer-copyright">© 2026 摩瑪建材產品資訊網站. All Rights Reserved.</p>
@@ -1303,21 +1307,21 @@
 
     <script>
         const products = [
-            { name: '羅馬洞石-米', price: 9900, category: '經濟款', specs: '1200×2800mm｜4mm｜19kg', img: 'images/羅馬洞石-米白.jpg' },
-            { name: '幻境潘朵拉', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: 'images/幻境潘朵拉.jpg' },
+            { name: '羅馬洞石-米', price: 9900, category: '經濟款', specs: '1200×2800mm｜4mm｜19kg', img: 'https://moma-images.pages.dev/輕奢石/羅馬洞石-米白.jpg' },
+            { name: '幻境潘朵拉', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: 'https://moma-images.pages.dev/輕奢石/幻境潘朵拉.jpg' },
             { name: '大理白花', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: '' },
-            { name: '義式金絲', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: 'images/義式金絲.jpg' },
-            { name: '礦黑岩板', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: 'images/礦黑岩板.jpg' },
-            { name: '極地冰岩', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: 'images/卡拉拉白.jpg' },
+            { name: '義式金絲', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: 'https://moma-images.pages.dev/輕奢石/義式金絲.jpg' },
+            { name: '礦黑岩板', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: 'https://moma-images.pages.dev/輕奢石/礦黑岩板.jpg' },
+            { name: '極地冰岩', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: 'https://moma-images.pages.dev/輕奢石/卡拉拉白.jpg' },
             { name: '維多玄岩', price: 10900, category: '標準款', specs: '1200×2800mm｜3mm｜16kg', img: '' },
             { name: '水泥澆鑄-米白', price: 11900, category: '標準款', specs: '1200×2800mm｜5mm｜21kg', img: '' },
-            { name: '編織岩-米白', price: 12900, category: '進階款', specs: '1200×2800mm｜5mm｜20kg', img: 'images/編織岩-米白.jpg' },
-            { name: '流沙琥珀', price: 12900, category: '進階款', specs: '1200×2800mm｜5mm｜21kg', img: 'images/流沙琥珀.jpg' },
-            { name: '玄武墨黑', price: 12900, category: '進階款', specs: '1200×2800mm｜6mm｜21kg', img: 'images/玄武墨黑.jpg' },
-            { name: '水洗鏽金', price: 13900, category: '頂級款', specs: '1200×2800mm｜4mm｜19kg', img: 'images/水洗鏽金.jpg' },
-            { name: '炭燒木-黑', price: 13900, category: '頂級款', specs: '1200×2800mm｜6mm｜23kg', img: 'images/炭燒木-黑.jpg' },
-            { name: '羅馬金砂-黃', price: 13900, category: '頂級款', specs: '1200×2800mm｜6mm｜23kg', img: 'images/羅馬金砂-黃.jpg' },
-            { name: '卡斯灰鑽', price: 13900, category: '頂級款', specs: '1200×2800mm｜4mm｜20kg', img: 'images/卡斯灰鑽.jpg' }
+            { name: '編織岩-米白', price: 12900, category: '進階款', specs: '1200×2800mm｜5mm｜20kg', img: 'https://moma-images.pages.dev/輕奢石/編織岩-米白.jpg' },
+            { name: '流沙琥珀', price: 12900, category: '進階款', specs: '1200×2800mm｜5mm｜21kg', img: 'https://moma-images.pages.dev/輕奢石/流沙琥珀.jpg' },
+            { name: '玄武墨黑', price: 12900, category: '進階款', specs: '1200×2800mm｜6mm｜21kg', img: 'https://moma-images.pages.dev/輕奢石/玄武墨黑.jpg' },
+            { name: '水洗鏽金', price: 13900, category: '頂級款', specs: '1200×2800mm｜4mm｜19kg', img: 'https://moma-images.pages.dev/輕奢石/水洗鏽金.jpg' },
+            { name: '炭燒木-黑', price: 13900, category: '頂級款', specs: '1200×2800mm｜6mm｜23kg', img: 'https://moma-images.pages.dev/輕奢石/炭燒木-黑.jpg' },
+            { name: '羅馬金砂-黃', price: 13900, category: '頂級款', specs: '1200×2800mm｜6mm｜23kg', img: 'https://moma-images.pages.dev/輕奢石/羅馬金砂-黃.jpg' },
+            { name: '卡斯灰鑽', price: 13900, category: '頂級款', specs: '1200×2800mm｜4mm｜20kg', img: 'https://moma-images.pages.dev/輕奢石/卡斯灰鑽.jpg' }
         ];
 
         const badgeClass = {

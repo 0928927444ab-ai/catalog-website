@@ -49,7 +49,11 @@
       "Bash(sort:*)",
       "Bash(taskkill:*)",
       "Bash(start \"\" \"C:\\\\Users\\\\詹家騏\\\\Desktop\\\\website\\\\型錄網站\\\\網頁結構圖.html\")",
-      "Bash(start \"\" \"C:\\\\Users\\\\詹家騏\\\\Desktop\\\\website\\\\型錄網站\\\\網站完整架構圖.html\")"
+      "Bash(start \"\" \"C:\\\\Users\\\\詹家騏\\\\Desktop\\\\website\\\\型錄網站\\\\網站完整架構圖.html\")",
+      "mcp__chrome-devtools__emulate",
+      "Bash(git fetch:*)",
+      "Bash(where wrangler:*)",
+      "Bash(npx wrangler:*)"
     ]
   }
 }
